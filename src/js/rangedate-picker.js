@@ -17,6 +17,7 @@ const defaultCaptions = {
 const defaultStyle = {
   daysName: 'root__daysName',
   days: 'root__days',
+  daysBlock: 'root__days_block',
   daysSelected: 'root__days__selected',
   daysInRange: 'root__days__in-range',
   firstDate: 'root_first-date',
@@ -107,7 +108,7 @@ export default {
     // options for captions are: title, ok_button
     captions: {
       type: Object,
-      default: () => defaultCaptions
+      default: () => {}
     },
     format: {
       type: String,
@@ -147,6 +148,9 @@ export default {
   computed: {
     s: function () {
       return Object.assign({}, defaultStyle, this.style)
+    },
+    c: function () {
+      return Object.assign({}, defaultCaptions, this.captions)
     },
     startMonthDay: function () {
       return new Date(this.startActiveYear, this.startActiveMonth, 1).getDay()
