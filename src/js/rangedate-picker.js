@@ -15,14 +15,13 @@ const defaultCaptions = {
 }
 
 const defaultStyle = {
-  daysName: 'root__daysName',
-  days: 'root__days',
-  daysBlock: 'root__days_block',
-  daysSelected: 'root__days__selected',
-  daysInRange: 'root__days__in-range',
-  firstDate: 'root_first-date',
-  secondDate: 'root_second-date',
-  presetRanges: 'root__preset-ranges'
+  daysWeeks: 'calendar_weeks',
+  days: 'calendar_days',
+  daysSelected: 'calendar_days_selected',
+  daysInRange: 'calendar_days_in-range',
+  firstDate: 'calendar_month_left',
+  secondDate: 'calendar_month_right',
+  presetRanges: 'calendar_preset-ranges'
 }
 
 const defaultPresets = {
@@ -108,7 +107,7 @@ export default {
     // options for captions are: title, ok_button
     captions: {
       type: Object,
-      default: () => {}
+      default: () => defaultCaptions
     },
     format: {
       type: String,
@@ -148,9 +147,6 @@ export default {
   computed: {
     s: function () {
       return Object.assign({}, defaultStyle, this.style)
-    },
-    c: function () {
-      return Object.assign({}, defaultCaptions, this.captions)
     },
     startMonthDay: function () {
       return new Date(this.startActiveYear, this.startActiveMonth, 1).getDay()
