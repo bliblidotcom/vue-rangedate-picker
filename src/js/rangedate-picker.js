@@ -213,8 +213,11 @@ export default {
       const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay) + 1
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth))
     },
-    isDateSelected (r, i, key, startMonthDay) {
+    isDateSelected (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
+      const lastDayInMonth = new Date(this.startActiveYear, this.startNextActiveMonth, 0).getDate()
+      if (result < 2 || result > endMonthDate + 1) return false
+
       let currDate = null
       if (key === 'first') {
         currDate = new Date(this.startActiveYear, this.startActiveMonth, result)
@@ -224,8 +227,11 @@ export default {
       return (this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) ||
         (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime())
     },
-    isDateInRange (r, i, key, startMonthDay) {
+    isDateInRange (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
+      const lastDayInMonth = new Date(this.startActiveYear, this.startNextActiveMonth, 0).getDate()
+      if (result < 2 || result > endMonthDate + 1) return false
+
       let currDate = null
       if (key === 'first') {
         currDate = new Date(this.startActiveYear, this.startActiveMonth, result)
