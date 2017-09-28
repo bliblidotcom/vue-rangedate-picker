@@ -1,8 +1,9 @@
 <template>
-  <div class="root">
-    <h2 class="root__title">{{captions.title}}</h2>
-    Selected Range: {{dateRange.start}} - {{dateRange.end}}<br/>
-    <div class="calendar">
+  <div class="calendar-root">
+    <h2 class="calendar-title">{{captions.title}}</h2>
+    Selected Range:
+    <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
+    <div class="calendar" v-if="isOpen">
       <div class="calendar-wrap">
         <div :class="s.firstDate">
           <div class="months-text">
@@ -37,7 +38,7 @@
           <li class="calendar_preset-ranges" v-for="item in finalPresetRanges" @click="updatePreset(item)">
             {{item.label}}
           </li>
-          <li><button>{{captions.ok_button}}</button></li>
+          <li><button class="btn-apply">{{captions.ok_button}}</button></li>
         </ul>
       </div>
     </div>
@@ -47,11 +48,19 @@
 <script src="./js/rangedate-picker.js"></script>
 
 <style lang="css">
-.calendar{
+
+.input-date{
   display: block;
-  width: 700px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  border:1px solid #ccc;
+  padding:5px;
+  font-size: 14px;
+  width: 200px;
+  cursor: pointer;
+}
+.active-preset {
+  border: 1px solid #0096d9;
+  color: #0096d9;
+  border-radius: 3px;
 }
 .months-text {
   text-align: center;
@@ -71,27 +80,41 @@
   height:16px;
   background-image: url('data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxLjQ5IDMxLjQ5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMS40OSAzMS40OTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiPgo8cGF0aCBkPSJNMjEuMjA1LDUuMDA3Yy0wLjQyOS0wLjQ0NC0xLjE0My0wLjQ0NC0xLjU4NywwYy0wLjQyOSwwLjQyOS0wLjQyOSwxLjE0MywwLDEuNTcxbDguMDQ3LDguMDQ3SDEuMTExICBDMC40OTIsMTQuNjI2LDAsMTUuMTE4LDAsMTUuNzM3YzAsMC42MTksMC40OTIsMS4xMjcsMS4xMTEsMS4xMjdoMjYuNTU0bC04LjA0Nyw4LjAzMmMtMC40MjksMC40NDQtMC40MjksMS4xNTksMCwxLjU4NyAgYzAuNDQ0LDAuNDQ0LDEuMTU5LDAuNDQ0LDEuNTg3LDBsOS45NTItOS45NTJjMC40NDQtMC40MjksMC40NDQtMS4xNDMsMC0xLjU3MUwyMS4yMDUsNS4wMDd6IiBmaWxsPSIjMDA2REYwIi8+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=')
 }
+.calendar-root,
+.calendar-title {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.calendar{
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 700px;
+  font-size: 12px;
+  height: 250px;
+  box-shadow: -3px 4px 12px -1px #ccc;
+  background: #fff;
+}
 .calendar ul {
   list-style-type: none;
 }
 .calendar-wrap{
   display: inline-block;
   float:left;
-  width: 65%;
-  padding: 2px;
+  width: 75%;
+  padding: 10px;
 }
 .calendar-range{
   float: left;
   padding: 0 12px;
-  border: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  margin: 15px -2px;
 }
 
 .calendar_month_left,
 .calendar_month_right {
   float: left;
-  width: 45%;
+  width: 43%;
   padding: 10px;
-  border: 1px solid #ccc;
+  margin: 5px;
 }
 
 .calendar_weeks {
@@ -155,4 +178,12 @@ li.calendar_days_in-range {
  background: #ddd;
 }
 
+.btn-apply {
+  width: 100%;
+  background: #f7931e;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+}
 </style>

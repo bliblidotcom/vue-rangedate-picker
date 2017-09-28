@@ -1,3 +1,5 @@
+import fecha from 'fecha'
+
 const defaultConfig = {}
 const defaultI18n = 'EN'
 const availableMonths = {
@@ -5,8 +7,15 @@ const availableMonths = {
     'December']
 }
 
+fecha.i18n = {
+  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des']
+}
+
 const availableShortDays = {
-  EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
 }
 
 const defaultCaptions = {
@@ -27,9 +36,10 @@ const defaultStyle = {
 const defaultPresets = {
   today: function () {
     const n = new Date()
-    const today = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+    const today = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
       label: 'Today',
+      active: false,
       dateRange: {
         start: today,
         end: today
@@ -38,10 +48,11 @@ const defaultPresets = {
   },
   thisMonth: function () {
     const n = new Date()
-    const startMonth = new Date(n.getFullYear(), n.getMonth(), 1)
-    const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 0)
+    const startMonth = new Date(n.getFullYear(), n.getMonth(), 2)
+    const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1)
     return {
       label: 'This Month',
+      active: false,
       dateRange: {
         start: startMonth,
         end: endMonth
@@ -54,6 +65,7 @@ const defaultPresets = {
     const endMonth = new Date(n.getFullYear(), n.getMonth(), 0)
     return {
       label: 'Last Month',
+      active: false,
       dateRange: {
         start: startMonth,
         end: endMonth
@@ -66,6 +78,7 @@ const defaultPresets = {
     const end = new Date(n.getFullYear(), n.getMonth(), n.getDate())
     return {
       label: 'Last 7 Days',
+      active: false,
       dateRange: {
         start: start,
         end: end
@@ -78,6 +91,7 @@ const defaultPresets = {
     const end = new Date(n.getFullYear(), n.getMonth(), n.getDate())
     return {
       label: 'Last 30 Days',
+      active: false,
       dateRange: {
         start: start,
         end: end
@@ -111,7 +125,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'dd MMM YYYY'
+      default: 'DD MMM YYYY'
     },
     styles: {
       type: Object,
@@ -138,7 +152,9 @@ export default {
     return {
       dateRange: {},
       numOfDays: 7,
-      isFirstChoice: true
+      isFirstChoice: true,
+      isOpen: false,
+      presetActive: false
     }
   },
   created () {
@@ -177,6 +193,20 @@ export default {
     }
   },
   methods: {
+    toggleCalendar: function () {
+      return this.isOpen ? this.isOpen = false : this.isOpen = true
+    },
+    getDateString: function (date, format = this.format) {
+      if (!date) {
+        return null
+      }
+      const dateparse = new Date(Date.parse(date))
+      return fecha.format(new Date(dateparse.getFullYear(), dateparse.getMonth(), dateparse.getDate() - 1), format)
+    },
+    setActivePreset: function (item) {
+      this.presetActive == true
+      item.active == this.presetActive
+    },
     getDayIndexInMonth: function (r, i, startMonthDay) {
       const date = (this.numOfDays * (r - 1)) + i
       return date - startMonthDay
