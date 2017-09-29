@@ -1,13 +1,16 @@
 <template>
   <div class="calendar-root">
-    <h2 class="calendar-title">{{captions.title}}</h2>
-    Selected Range:
     <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
-    <div class="calendar" v-if="isOpen">
+    <div class="calendar" v-bind:class="{'calendar-mobile ': isMobile}" v-if="isOpen">
+      <div class="calendar-head" v-if="!isMobile">
+        <h2>{{captions.title}}</h2>
+        <i class="close" @click="toggleCalendar()"></i>
+      </div>
       <div class="calendar-wrap">
-        <div :class="s.firstDate">
+        <div class="calendar_month_left" v-bind:class="{'calendar-left-mobile': isMobile}" v-if="setMonthActive || showMonth">
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
+            <i class="right" @click="goNextMonth" v-if="isMobile"></i>
             {{months[startActiveMonth] +' '+ startActiveYear}}</div>
             <ul :class="s.daysWeeks">
               <li v-for="item in shortDays">{{item}}</li>
@@ -18,7 +21,7 @@
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
-        <div :class="s.secondDate">
+        <div class="calendar_month_right" v-if="!isMobile">
           <div class="months-text">
             {{months[startNextActiveMonth] +' '+ startActiveYear}}
             <i class="right" @click="goNextMonth"></i>
@@ -33,14 +36,15 @@
           </ul>
         </div>
       </div>
-      <div class="calendar-range">
+      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isMobile}" v-if="setMonthActive || !showMonth">
         <ul class="calendar_preset">
-          <li class="calendar_preset-ranges" v-for="item in finalPresetRanges" @click="updatePreset(item)">
+          <li class="calendar_preset-ranges" v-for="(item, idx) in finalPresetRanges" @click="updatePreset(item)" v-bind:class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>
-          <li><button class="btn-apply">{{captions.ok_button}}</button></li>
+          <li><button class="btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
       </div>
+      
     </div>
   </div>
 </template>
@@ -89,9 +93,24 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 700px;
   font-size: 12px;
-  height: 250px;
+  height: 300px;
   box-shadow: -3px 4px 12px -1px #ccc;
   background: #fff;
+}
+
+.calendar-head h2{
+  padding: 20px 0px 0px 20px;
+  margin: 0px;
+}
+.close:hover{
+  cursor: pointer;
+}
+.close:after{
+  content: "❌";
+  font-style: normal;
+  float: right;
+  padding: 10px;
+  margin-top: -35px;
 }
 .calendar ul {
   list-style-type: none;
@@ -107,6 +126,9 @@
   padding: 0 12px;
   border-left: 1px solid #ccc;
   margin: 15px -2px;
+}
+.calendar-left-mobile{
+  width: 100% !important;
 }
 
 .calendar_month_left,
@@ -175,7 +197,15 @@ li.calendar_days_in-range {
   margin-top: 1px;
 }
 .calendar_preset li.calendar_preset-ranges:hover {
- background: #ddd;
+ background: #eee;
+}
+
+.calendar-mobile {
+    width: 260px;
+}
+.calendar-range-mobile{
+  width: 90%;
+  padding: 10px;
 }
 
 .btn-apply {

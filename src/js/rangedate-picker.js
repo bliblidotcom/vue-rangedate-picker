@@ -154,11 +154,16 @@ export default {
       numOfDays: 7,
       isFirstChoice: true,
       isOpen: false,
-      presetActive: false
+      presetActive: '',
+      isMobile: true,
+      showMonth: false
     }
   },
   created () {
     this.range = this.initRange || null
+    if (this.isMobile) {
+      this.isOpen = true
+    }
   },
   computed: {
     s: function () {
@@ -190,10 +195,16 @@ export default {
         tmp[i] = plainItem
       }
       return tmp
+    },
+    setMonthActive: function () {
+      return this.isMobile ? this.showMonth = false : this.showMonth = true
     }
   },
   methods: {
     toggleCalendar: function () {
+      if (this.isMobile) {
+        return this.showMonth ? this.showMonth = false : this.showMonth = true
+      }
       return this.isOpen ? this.isOpen = false : this.isOpen = true
     },
     getDateString: function (date, format = this.format) {
@@ -202,10 +213,6 @@ export default {
       }
       const dateparse = new Date(Date.parse(date))
       return fecha.format(new Date(dateparse.getFullYear(), dateparse.getMonth(), dateparse.getDate() - 1), format)
-    },
-    setActivePreset: function (item) {
-      this.presetActive == true
-      item.active == this.presetActive
     },
     getDayIndexInMonth: function (r, i, startMonthDay) {
       const date = (this.numOfDays * (r - 1)) + i
@@ -238,6 +245,11 @@ export default {
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startActiveMonth))
+      if (this.isMobile) {
+        if (this.dateRange.start && this.dateRange.end) {
+          this.showMonth = false
+        }
+      }
     },
     selectSecondItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay) + 1
@@ -282,10 +294,14 @@ export default {
       this.startActiveYear = nextMonth.getFullYear()
     },
     updatePreset (item) {
+      this.presetActive = item.label
       this.dateRange = item.dateRange
       // update start active month
       this.startActiveMonth = this.dateRange.start.getMonth()
       this.startActiveYear = this.dateRange.start.getFullYear()
+    },
+    setDateValue: function () {
+      this.$emit('date', this.dateRange)
     }
   }
 }
