@@ -155,13 +155,13 @@ export default {
       isFirstChoice: true,
       isOpen: false,
       presetActive: '',
-      isMobile: true,
+      isCompact: true,
       showMonth: false
     }
   },
   created () {
     this.range = this.initRange || null
-    if (this.isMobile) {
+    if (this.isCompact) {
       this.isOpen = true
     }
   },
@@ -197,12 +197,12 @@ export default {
       return tmp
     },
     setMonthActive: function () {
-      return this.isMobile ? this.showMonth = false : this.showMonth = true
+      return this.isCompact ? this.showMonth = false : this.showMonth = true
     }
   },
   methods: {
     toggleCalendar: function () {
-      if (this.isMobile) {
+      if (this.isCompact) {
         return this.showMonth ? this.showMonth = false : this.showMonth = true
       }
       return this.isOpen ? this.isOpen = false : this.isOpen = true
@@ -245,9 +245,10 @@ export default {
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startActiveMonth))
-      if (this.isMobile) {
+      if (this.isCompact) {
         if (this.dateRange.start && this.dateRange.end) {
           this.showMonth = false
+          this.presetActive = ''
         }
       }
     },

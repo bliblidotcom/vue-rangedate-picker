@@ -1,16 +1,16 @@
 <template>
   <div class="calendar-root">
     <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
-    <div class="calendar" v-bind:class="{'calendar-mobile ': isMobile}" v-if="isOpen">
-      <div class="calendar-head" v-if="!isMobile">
+    <div class="calendar" v-bind:class="{'calendar-mobile ': isCompact}" v-if="isOpen">
+      <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
         <i class="close" @click="toggleCalendar()"></i>
       </div>
       <div class="calendar-wrap">
-        <div class="calendar_month_left" v-bind:class="{'calendar-left-mobile': isMobile}" v-if="setMonthActive || showMonth">
+        <div class="calendar_month_left" v-bind:class="{'calendar-left-mobile': isCompact}" v-if="setMonthActive || showMonth">
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
-            <i class="right" @click="goNextMonth" v-if="isMobile"></i>
+            <i class="right" @click="goNextMonth" v-if="isCompact"></i>
             {{months[startActiveMonth] +' '+ startActiveYear}}</div>
             <ul :class="s.daysWeeks">
               <li v-for="item in shortDays">{{item}}</li>
@@ -21,7 +21,7 @@
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
-        <div class="calendar_month_right" v-if="!isMobile">
+        <div class="calendar_month_right" v-if="!isCompact">
           <div class="months-text">
             {{months[startNextActiveMonth] +' '+ startActiveYear}}
             <i class="right" @click="goNextMonth"></i>
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isMobile}" v-if="setMonthActive || !showMonth">
+      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isCompact}" v-if="setMonthActive || !showMonth">
         <ul class="calendar_preset">
           <li class="calendar_preset-ranges" v-for="(item, idx) in finalPresetRanges" @click="updatePreset(item)" v-bind:class="{'active-preset': presetActive === item.label}">
             {{item.label}}
