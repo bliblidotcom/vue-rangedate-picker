@@ -1,9 +1,33 @@
 import 'style-loader!css-loader!mocha-css'
 
+import RangedatePicker from 'src/RangedatePicker.vue'
+import { createVM } from './helpers/utils.js'
+
 // create a div where mocha can add its stuff
 const mochaDiv = document.createElement('DIV')
 mochaDiv.id = 'mocha'
 document.body.appendChild(mochaDiv)
+
+// create preview area
+const elPreviewA = document.createElement('DIV')
+elPreviewA.id = 'div-previewA'
+elPreviewA.classList.add('test')
+mochaDiv.appendChild(elPreviewA)
+
+const elPreview1 = document.createElement('DIV')
+elPreview1.id = 'div-preview1'
+elPreview1.classList.add('mocha')
+elPreviewA.appendChild(elPreview1)
+
+const elPreviewB = document.createElement('DIV')
+elPreviewB.id = 'div-previewB'
+elPreviewB.classList.add('test')
+mochaDiv.appendChild(elPreviewB)
+
+const elPreview2 = document.createElement('DIV')
+elPreview2.id = 'div-preview2'
+elPreview2.classList.add('mocha')
+elPreviewB.appendChild(elPreview2)
 
 import 'mocha/mocha.js'
 import sinon from 'sinon'
@@ -48,6 +72,14 @@ afterEach(function () {
 before(function () {
   vms = []
   testId = 0
+
+  // create preview vm
+  createVM({ DOMElement: elPreview1 }, `
+<rangedate-picker></rangedate-picker>
+`, { components: { RangedatePicker }})// create preview vm
+  createVM({ DOMElement: elPreview2 }, `
+<rangedate-picker compactMode="true"></rangedate-picker>
+`, { components: { RangedatePicker }})
 })
 after(function () {
   requestAnimationFrame(function () {

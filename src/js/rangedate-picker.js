@@ -146,6 +146,10 @@ export default {
     presetRanges: {
       type: Object,
       default: () => defaultPresets
+    },
+    compactMode: {
+      type: String,
+      default: 'false'
     }
   },
   data () {
@@ -155,7 +159,6 @@ export default {
       isFirstChoice: true,
       isOpen: false,
       presetActive: '',
-      isCompact: true,
       showMonth: false
     }
   },
@@ -196,16 +199,20 @@ export default {
       }
       return tmp
     },
+    isCompact: function () {
+      return this.compactMode === 'true'
+    },
     setMonthActive: function () {
-      return this.isCompact ? this.showMonth = false : this.showMonth = true
+      this.isCompact ? this.showMonth = false : this.showMonth = true
     }
   },
   methods: {
     toggleCalendar: function () {
       if (this.isCompact) {
-        return this.showMonth ? this.showMonth = false : this.showMonth = true
+        this.showMonth ? this.showMonth = false : this.showMonth = true
+        return
       }
-      return this.isOpen ? this.isOpen = false : this.isOpen = true
+      this.isOpen ? this.isOpen = false : this.isOpen = true
     },
     getDateString: function (date, format = this.format) {
       if (!date) {
@@ -258,7 +265,6 @@ export default {
     },
     isDateSelected (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
-      const lastDayInMonth = new Date(this.startActiveYear, this.startNextActiveMonth, 0).getDate()
       if (result < 2 || result > endMonthDate + 1) return false
 
       let currDate = null
@@ -272,7 +278,6 @@ export default {
     },
     isDateInRange (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
-      const lastDayInMonth = new Date(this.startActiveYear, this.startNextActiveMonth, 0).getDate()
       if (result < 2 || result > endMonthDate + 1) return false
 
       let currDate = null
