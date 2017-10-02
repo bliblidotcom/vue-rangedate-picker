@@ -209,10 +209,9 @@ export default {
   methods: {
     toggleCalendar: function () {
       if (this.isCompact) {
-        this.showMonth ? this.showMonth = false : this.showMonth = true
-        return
+        this.showMonth = !this.showMonth
       }
-      this.isOpen ? this.isOpen = false : this.isOpen = true
+      this.isOpen = !this.isOpen
     },
     getDateString: function (date, format = this.format) {
       if (!date) {
@@ -307,7 +306,7 @@ export default {
       this.startActiveYear = this.dateRange.start.getFullYear()
     },
     setDateValue: function () {
-      this.$emit('date', this.dateRange)
+      this.$emit('dateSelected', this.dateRange)
     }
   }
 }

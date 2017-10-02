@@ -6,6 +6,5 @@ describe('RangedatePicker.vue', function () {
     const vm = createVM(this, `
 <rangedate-picker></rangedate-picker>
 `, { components: { RangedatePicker }})
-    vm.$el.querySelector('.root h1').textContent.should.eql('Hello World!')
   })
 })
