@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isCompact}" v-if="!showMonth">
+      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isCompact}" v-if="!showMonth || !isCompact">
         <ul class="calendar_preset">
           <li
             class="calendar_preset-ranges"
