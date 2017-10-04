@@ -150,6 +150,10 @@ export default {
     compact: {
       type: String,
       default: 'false'
+    },
+    righttoleft: {
+      type: String,
+      default: 'false'
     }
   },
   data () {
@@ -201,6 +205,9 @@ export default {
     },
     isCompact: function () {
       return this.compact === 'true'
+    },
+    isRighttoLeft: function () {
+      return this.righttoleft === 'true'
     }
   },
   methods: {
