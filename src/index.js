@@ -1,7 +1,7 @@
 import RangedatePicker from './RangedatePicker.vue'
 
 function plugin (Vue) {
-  Vue.component(RangedatePicker)
+  Vue.component('rangedate-picker', RangedatePicker)
 }
 
 // Install by default if using the script tag

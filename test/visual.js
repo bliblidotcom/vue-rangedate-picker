@@ -78,7 +78,7 @@ before(function () {
 <rangedate-picker></rangedate-picker>
 `, { components: { RangedatePicker }})// create preview vm
   createVM({ DOMElement: elPreview2 }, `
-<rangedate-picker compactMode="true"></rangedate-picker>
+<rangedate-picker compact="true"></rangedate-picker>
 `, { components: { RangedatePicker }})
 })
 after(function () {

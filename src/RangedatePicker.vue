@@ -7,7 +7,7 @@
         <i class="close" @click="toggleCalendar()"></i>
       </div>
       <div class="calendar-wrap">
-        <div class="calendar_month_left" v-bind:class="{'calendar-left-mobile': isCompact}" v-if="setMonthActive || showMonth">
+        <div class="calendar_month_left" v-bind:class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
             <i class="right" @click="goNextMonth" v-if="isCompact"></i>
@@ -36,9 +36,14 @@
           </ul>
         </div>
       </div>
-      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isCompact}" v-if="setMonthActive || !showMonth">
+      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isCompact}" v-if="!showMonth || !isCompact">
         <ul class="calendar_preset">
-          <li class="calendar_preset-ranges" v-for="(item, idx) in finalPresetRanges" @click="updatePreset(item)" v-bind:class="{'active-preset': presetActive === item.label}">
+          <li
+            class="calendar_preset-ranges"
+            v-for="(item, idx) in finalPresetRanges"
+            :key="idx"
+            @click="updatePreset(item)"
+            :class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>
           <li><button class="btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
@@ -58,7 +63,7 @@
   border:1px solid #ccc;
   padding:5px;
   font-size: 14px;
-  width: 200px;
+  width: 230px;
   cursor: pointer;
 }
 .active-preset {
@@ -96,6 +101,8 @@
   height: 300px;
   box-shadow: -3px 4px 12px -1px #ccc;
   background: #fff;
+  position: absolute;
+  z-index: 99;
 }
 
 .calendar-head h2{
@@ -201,11 +208,15 @@ li.calendar_days_in-range {
 }
 
 .calendar-mobile {
-    width: 260px;
+  width: 260px;
+  z-index: 100;
+  box-shadow: none;
 }
 .calendar-range-mobile{
   width: 90%;
   padding: 10px;
+  border-left: none;
+  margin: -20px 0px;
 }
 
 .btn-apply {

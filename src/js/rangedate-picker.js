@@ -147,7 +147,7 @@ export default {
       type: Object,
       default: () => defaultPresets
     },
-    compactMode: {
+    compact: {
       type: String,
       default: 'false'
     }
@@ -200,19 +200,18 @@ export default {
       return tmp
     },
     isCompact: function () {
-      return this.compactMode === 'true'
-    },
-    setMonthActive: function () {
-      this.isCompact ? this.showMonth = false : this.showMonth = true
+      return this.compact === 'true'
     }
   },
   methods: {
     toggleCalendar: function () {
       if (this.isCompact) {
-        this.showMonth ? this.showMonth = false : this.showMonth = true
+        this.showMonth = !this.showMonth
         return
       }
-      this.isOpen ? this.isOpen = false : this.isOpen = true
+      this.isOpen = !this.isOpen
+      this.showMonth = !this.showMonth
+      return
     },
     getDateString: function (date, format = this.format) {
       if (!date) {
@@ -252,16 +251,19 @@ export default {
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startActiveMonth))
-      if (this.isCompact) {
-        if (this.dateRange.start && this.dateRange.end) {
+      if (this.dateRange.start && this.dateRange.end) {
+        this.presetActive = ''
+        if (this.isCompact) {
           this.showMonth = false
-          this.presetActive = ''
         }
       }
     },
     selectSecondItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay) + 1
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth))
+      if (this.dateRange.start && this.dateRange.end) {
+        this.presetActive = ''
+      }
     },
     isDateSelected (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
@@ -307,7 +309,7 @@ export default {
       this.startActiveYear = this.dateRange.start.getFullYear()
     },
     setDateValue: function () {
-      this.$emit('date', this.dateRange)
+      this.$emit('selected', this.dateRange)
     }
   }
 }
