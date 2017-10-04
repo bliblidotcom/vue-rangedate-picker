@@ -147,7 +147,7 @@ export default {
       type: Object,
       default: () => defaultPresets
     },
-    compactMode: {
+    compact: {
       type: String,
       default: 'false'
     }
@@ -200,7 +200,7 @@ export default {
       return tmp
     },
     isCompact: function () {
-      return this.compactMode === 'true'
+      return this.compact === 'true'
     }
   },
   methods: {
@@ -309,7 +309,7 @@ export default {
       this.startActiveYear = this.dateRange.start.getFullYear()
     },
     setDateValue: function () {
-      this.$emit('dateSelected', this.dateRange)
+      this.$emit('selected', this.dateRange)
     }
   }
 }

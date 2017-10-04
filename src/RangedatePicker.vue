@@ -63,7 +63,7 @@
   border:1px solid #ccc;
   padding:5px;
   font-size: 14px;
-  width: 200px;
+  width: 230px;
   cursor: pointer;
 }
 .active-preset {
@@ -215,6 +215,8 @@ li.calendar_days_in-range {
 .calendar-range-mobile{
   width: 90%;
   padding: 10px;
+  border-left: none;
+  margin: -20px 0px;
 }
 
 .btn-apply {
