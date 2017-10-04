@@ -128,12 +128,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/havban/vue-rangedate-picker.git"
+    "url": "git+https://github.com/bliblidotcom/vue-rangedate-picker.git"
   },
   "bugs": {
-    "url": "https://github.com/havban/vue-rangedate-picker/issues"
+    "url": "https://github.com/bliblidotcom/vue-rangedate-picker/issues"
   },
-  "homepage": "https://github.com/havban/vue-rangedate-picker#readme",
+  "homepage": "https://github.com/bliblidotcom/vue-rangedate-picker#readme",
   "license": {
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
