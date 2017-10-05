@@ -46,7 +46,7 @@
             :class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>
-          <li><button class="btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
+          <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
       </div>
       
@@ -110,7 +110,7 @@
   box-shadow: -3px 4px 12px -1px #ccc;
   background: #fff;
   position: absolute;
-  z-index: 99;
+  z-index: 9;
 }
 
 .calendar-head h2{
@@ -217,7 +217,7 @@ li.calendar_days_in-range {
 
 .calendar-mobile {
   width: 260px;
-  z-index: 100;
+  z-index: 1;
   box-shadow: none;
 }
 .calendar-range-mobile{
@@ -227,12 +227,12 @@ li.calendar_days_in-range {
   margin: -20px 0px;
 }
 
-.btn-apply {
+.calendar-btn-apply {
   width: 100%;
   background: #f7931e;
   color: #fff;
   border: none;
-  padding: 10px;
+  padding: 9px;
   font-size: 14px;
 }
 </style>

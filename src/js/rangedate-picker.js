@@ -61,8 +61,8 @@ const defaultPresets = {
   },
   lastMonth: function () {
     const n = new Date()
-    const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 1)
-    const endMonth = new Date(n.getFullYear(), n.getMonth(), 0)
+    const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
+    const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
     return {
       label: 'Last Month',
       active: false,
@@ -317,6 +317,9 @@ export default {
     },
     setDateValue: function () {
       this.$emit('selected', this.dateRange)
+      if (!this.isCompact) {
+        this.toggleCalendar()
+      }
     }
   }
 }
