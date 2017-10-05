@@ -61,8 +61,8 @@ const defaultPresets = {
   },
   lastMonth: function () {
     const n = new Date()
-    const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 1)
-    const endMonth = new Date(n.getFullYear(), n.getMonth(), 0)
+    const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
+    const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
     return {
       label: 'Last Month',
       active: false,
@@ -150,6 +150,10 @@ export default {
     compact: {
       type: String,
       default: 'false'
+    },
+    righttoleft: {
+      type: String,
+      default: 'false'
     }
   },
   data () {
@@ -201,6 +205,9 @@ export default {
     },
     isCompact: function () {
       return this.compact === 'true'
+    },
+    isRighttoLeft: function () {
+      return this.righttoleft === 'true'
     }
   },
   methods: {
@@ -310,6 +317,9 @@ export default {
     },
     setDateValue: function () {
       this.$emit('selected', this.dateRange)
+      if (!this.isCompact) {
+        this.toggleCalendar()
+      }
     }
   }
 }

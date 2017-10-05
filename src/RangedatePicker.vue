@@ -1,13 +1,13 @@
 <template>
   <div class="calendar-root">
     <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
-    <div class="calendar" v-bind:class="{'calendar-mobile ': isCompact}" v-if="isOpen">
+    <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
         <i class="close" @click="toggleCalendar()"></i>
       </div>
       <div class="calendar-wrap">
-        <div class="calendar_month_left" v-bind:class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
+        <div class="calendar_month_left" :class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
             <i class="right" @click="goNextMonth" v-if="isCompact"></i>
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-      <div class="calendar-range" v-bind:class="{'calendar-range-mobile ': isCompact}" v-if="!showMonth || !isCompact">
+      <div class="calendar-range" :class="{'calendar-range-mobile ': isCompact}" v-if="!showMonth || !isCompact">
         <ul class="calendar_preset">
           <li
             class="calendar_preset-ranges"
@@ -46,7 +46,7 @@
             :class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>
-          <li><button class="btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
+          <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
       </div>
       
@@ -65,6 +65,11 @@
   font-size: 14px;
   width: 230px;
   cursor: pointer;
+}
+.input-date:after{
+  content:"▼";
+  float:right;
+  font-size: smaller;
 }
 .active-preset {
   border: 1px solid #0096d9;
@@ -93,6 +98,9 @@
 .calendar-title {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.calendar-right-to-left {
+  margin-left: -460px;
+}
 .calendar{
   display: block;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -102,7 +110,7 @@
   box-shadow: -3px 4px 12px -1px #ccc;
   background: #fff;
   position: absolute;
-  z-index: 99;
+  z-index: 9;
 }
 
 .calendar-head h2{
@@ -209,7 +217,7 @@ li.calendar_days_in-range {
 
 .calendar-mobile {
   width: 260px;
-  z-index: 100;
+  z-index: 1;
   box-shadow: none;
 }
 .calendar-range-mobile{
@@ -219,12 +227,12 @@ li.calendar_days_in-range {
   margin: -20px 0px;
 }
 
-.btn-apply {
+.calendar-btn-apply {
   width: 100%;
   background: #f7931e;
   color: #fff;
   border: none;
-  padding: 10px;
+  padding: 9px;
   font-size: 14px;
 }
 </style>

@@ -8,6 +8,7 @@
       .block{
         display: flex;
         float:left;
+        width:300px;
         margin-right: 200px;
       }
       .wrap-cal{
@@ -32,6 +33,7 @@
             end date : {{ date2.end }} <br>
             <div class="wrap-cal">
               <rangedate-picker @selected="date2Selected"></rangedate-picker>
+              <rangedate-picker @selected="date2Selected" righttoleft="true"></rangedate-picker>
             </div>
           </div>
       </div>
