@@ -1,10 +1,14 @@
 <template>
   <div class="calendar-root">
-    <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
+    <div class="input-date" @click="toggleCalendar()" v-if="!isCompact"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
     <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
         <i class="close" @click="toggleCalendar()"></i>
+      </div>
+      <div class="calendar-head" v-if="isCompact">
+        <p>{{captions.title}}</p>
+        <div class="input-date" @click="toggleCalendar()" v-if="isCompact">{{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
       </div>
       <div class="calendar-wrap">
         <div class="calendar_month_left" :class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
@@ -49,7 +53,7 @@
           <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -60,20 +64,29 @@
 
 .input-date{
   display: block;
-  border:1px solid #ccc;
-  padding:5px;
+  padding: 0;
   font-size: 14px;
-  width: 230px;
+  width: 238px;
   cursor: pointer;
+  color: #0096d9;
+  font-weight: bold;
 }
 .input-date:after{
-  content:"▼";
+  content:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAAYUlEQVR42mNgAAI1DbUFqhqqCQxYgKqqqoG6hvoBBQUFAQZiAMggoIb/IIxuKMgwNXW1DyA5kKUMxAKQYnRDUQxTV7tAtAuxGQpkN1BkGDZDKTYM3VCqGAYD6urqBeQaBgDrSi1zSYFa1wAAAABJRU5ErkJggg==');
   float:right;
   font-size: smaller;
 }
-.active-preset {
+.input-date--title {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.input-date--title:before {
+  content:"";
+  padding: 5px 0;
+  display: block;
+}
+.calendar_preset li.calendar_preset-ranges.active-preset {
   border: 1px solid #0096d9;
-  color: #0096d9;
   border-radius: 3px;
 }
 .months-text {
@@ -112,7 +125,6 @@
   position: absolute;
   z-index: 9;
 }
-
 .calendar-head h2{
   padding: 20px 0px 0px 20px;
   margin: 0px;
@@ -126,6 +138,7 @@
   float: right;
   padding: 10px;
   margin-top: -35px;
+  font-size: 1.5em;
 }
 .calendar ul {
   list-style-type: none;
@@ -145,7 +158,6 @@
 .calendar-left-mobile{
   width: 100% !important;
 }
-
 .calendar_month_left,
 .calendar_month_right {
   float: left;
@@ -153,26 +165,21 @@
   padding: 10px;
   margin: 5px;
 }
-
 .calendar_weeks {
   margin: 0;
   padding: 10px 0;
   width: auto;
 }
-
 .calendar_weeks li {
   display: inline-block;
   width: 13.6%;
   color: #999;
-  
   text-align: center;
 }
-
 .calendar_days {
   margin: 0;
   padding: 0;
 }
-
 .calendar_days li {
   display: inline-block;
   width: 13.6%;
@@ -181,22 +188,18 @@
   cursor: pointer;
   line-height: 2em;
 }
-
 .calendar_days li:hover {
   background: #eee;
   color: #000;
 }
-
 li.calendar_days_selected {
   background: #0096d9;
   color: #fff;
 }
-
 li.calendar_days_in-range {
   background: #0096d9;
   color: #fff;
 }
-
 .calendar_preset{
   padding: 0;
 }
@@ -214,19 +217,6 @@ li.calendar_days_in-range {
 .calendar_preset li.calendar_preset-ranges:hover {
  background: #eee;
 }
-
-.calendar-mobile {
-  width: 260px;
-  z-index: 1;
-  box-shadow: none;
-}
-.calendar-range-mobile{
-  width: 90%;
-  padding: 10px;
-  border-left: none;
-  margin: -20px 0px;
-}
-
 .calendar-btn-apply {
   width: 100%;
   background: #f7931e;
@@ -235,4 +225,75 @@ li.calendar_days_in-range {
   padding: 9px;
   font-size: 14px;
 }
+
+/* isCompact */
+.calendar-mobile {
+  width: 260px;
+  z-index: 1;
+  box-shadow: none;
+}
+.calendar-mobile .calendar-head {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+.calendar-mobile .calendar-head p {
+  padding:0 0 5px;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+.calendar-mobile .calendar-wrap {
+  padding: 0;
+  width: 100%;
+}
+.calendar-mobile .calendar_month_left {
+  padding: 0;
+  margin: 20px 0 0;
+}
+.calendar-mobile .months-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 15px;
+}
+.calendar-mobile .calendar_weeks li, .calendar-mobile .calendar_days li {
+  width: 14.2%;
+  font-size: 14px;
+}
+.calendar-mobile .calendar_days li {
+  line-height: 2.5em;
+}
+.calendar-mobile .calendar_preset li.calendar_preset-ranges{
+  padding: 0 30px 0px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+.calendar-mobile .calendar_preset li.calendar_preset-ranges.active-preset {
+  border: 1px solid #0096d9;
+}
+.calendar-mobile .calendar-btn-apply {
+  width: 100%;
+  background: #f7931e;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  font-size: 18px;
+  margin-top: 30px;
+  border-radius: 2px;
+}
+.calendar-range-mobile{
+  width: 100%;
+  padding: 5px 0 10px;
+  border-left: none;
+  margin: 0px;
+}
+/* end isCompact */
+
+
 </style>
