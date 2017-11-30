@@ -64,7 +64,8 @@
 
 .input-date{
   display: block;
-  padding: 0;
+  border:1px solid #ccc;
+  padding:0;
   font-size: 14px;
   width: 238px;
   cursor: pointer;
@@ -125,6 +126,7 @@
   position: absolute;
   z-index: 9;
 }
+
 .calendar-head h2{
   padding: 20px 0px 0px 20px;
   margin: 0px;
@@ -158,6 +160,7 @@
 .calendar-left-mobile{
   width: 100% !important;
 }
+
 .calendar_month_left,
 .calendar_month_right {
   float: left;
@@ -165,21 +168,25 @@
   padding: 10px;
   margin: 5px;
 }
+
 .calendar_weeks {
   margin: 0;
   padding: 10px 0;
   width: auto;
 }
+
 .calendar_weeks li {
   display: inline-block;
   width: 13.6%;
   color: #999;
   text-align: center;
 }
+
 .calendar_days {
   margin: 0;
   padding: 0;
 }
+
 .calendar_days li {
   display: inline-block;
   width: 13.6%;
@@ -188,18 +195,22 @@
   cursor: pointer;
   line-height: 2em;
 }
+
 .calendar_days li:hover {
   background: #eee;
   color: #000;
 }
+
 li.calendar_days_selected {
   background: #0096d9;
   color: #fff;
 }
+
 li.calendar_days_in-range {
   background: #0096d9;
   color: #fff;
 }
+
 .calendar_preset{
   padding: 0;
 }
@@ -217,15 +228,6 @@ li.calendar_days_in-range {
 .calendar_preset li.calendar_preset-ranges:hover {
  background: #eee;
 }
-.calendar-btn-apply {
-  width: 100%;
-  background: #f7931e;
-  color: #fff;
-  border: none;
-  padding: 9px;
-  font-size: 14px;
-}
-
 /* isCompact */
 .calendar-mobile {
   width: 260px;
@@ -294,6 +296,4 @@ li.calendar_days_in-range {
   margin: 0px;
 }
 /* end isCompact */
-
-
 </style>
