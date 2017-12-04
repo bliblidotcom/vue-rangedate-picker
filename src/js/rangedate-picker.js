@@ -1,22 +1,34 @@
 import fecha from 'fecha'
 
 const defaultConfig = {}
-const defaultI18n = 'EN'
+const defaultI18n = 'ID'
 const availableMonths = {
   EN: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
     'December'],
-  ID: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
-}
-
-fecha.i18n = {
-  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
-  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-  monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec']
+  ID: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November',
+    'Desember']
 }
 
 const availableShortDays = {
   EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
+}
+
+const presetRangeLabel = {
+  EN: {
+    today: 'Today',
+    thisMonth: 'This Month',
+    lastMonth: 'Last Month',
+    lastSevenSays: 'Last 7 Days',
+    lastThirtyDays: 'Last 30 Days'
+  },
+  ID: {
+    today: 'Hari ini',
+    thisMonth: 'Bulan ini',
+    lastMonth: 'Bulan lalu',
+    lastSevenDays: '7 Hari Terakhir',
+    lastThirtyDays: '30 Hari Terakhir'
+  }
 }
 
 const defaultCaptions = {
@@ -39,7 +51,7 @@ const defaultPresets = {
     const n = new Date()
     const today = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
-      label: 'Today',
+      label: presetRangeLabel[defaultI18n].today,
       active: false,
       dateRange: {
         start: today,
@@ -52,7 +64,7 @@ const defaultPresets = {
     const startMonth = new Date(n.getFullYear(), n.getMonth(), 2)
     const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1)
     return {
-      label: 'This Month',
+      label: presetRangeLabel[defaultI18n].thisMonth,
       active: false,
       dateRange: {
         start: startMonth,
@@ -65,7 +77,7 @@ const defaultPresets = {
     const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
     const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
     return {
-      label: 'Last Month',
+      label: presetRangeLabel[defaultI18n].lastMonth,
       active: false,
       dateRange: {
         start: startMonth,
@@ -75,10 +87,10 @@ const defaultPresets = {
   },
   last7days: function () {
     const n = new Date()
-    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 7)
-    const end = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 6)
+    const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
-      label: 'Last 7 Days',
+      label: presetRangeLabel[defaultI18n].lastSevenDays,
       active: false,
       dateRange: {
         start: start,
@@ -88,10 +100,10 @@ const defaultPresets = {
   },
   last30days: function () {
     const n = new Date()
-    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 30)
-    const end = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29)
+    const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
-      label: 'Last 30 Days',
+      label: presetRangeLabel[defaultI18n].lastThirtyDays,
       active: false,
       dateRange: {
         start: start,
@@ -164,7 +176,8 @@ export default {
       isFirstChoice: true,
       isOpen: false,
       presetActive: '',
-      showMonth: false
+      showMonth: false,
+      activeMonthStart: this.startActiveMonth
     }
   },
   created () {
@@ -178,7 +191,7 @@ export default {
       return Object.assign({}, defaultStyle, this.style)
     },
     startMonthDay: function () {
-      return new Date(this.startActiveYear, this.startActiveMonth, 1).getDay()
+      return new Date(this.startActiveYear, this.activeMonthStart, 1).getDay()
     },
     startNextMonthDay: function () {
       return new Date(this.startActiveYear, this.startNextActiveMonth, 1).getDay()
@@ -187,10 +200,10 @@ export default {
       return new Date(this.startActiveYear, this.startNextActiveMonth, 0).getDate()
     },
     endNextMonthDate: function () {
-      return new Date(this.startActiveYear, this.startActiveMonth + 2, 0).getDate()
+      return new Date(this.startActiveYear, this.activeMonthStart + 2, 0).getDate()
     },
     startNextActiveMonth: function () {
-      return this.startActiveMonth + 1
+      return this.activeMonthStart >= 11 ? 0 : this.activeMonthStart + 1
     },
     finalPresetRanges: function () {
       const tmp = {}
@@ -258,7 +271,7 @@ export default {
     },
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
-      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startActiveMonth))
+      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
         if (this.isCompact) {
@@ -279,7 +292,7 @@ export default {
 
       let currDate = null
       if (key === 'first') {
-        currDate = new Date(this.startActiveYear, this.startActiveMonth, result)
+        currDate = new Date(this.startActiveYear, this.activeMonthStart, result)
       } else {
         currDate = new Date(this.startActiveYear, this.startNextActiveMonth, result)
       }
@@ -292,7 +305,7 @@ export default {
 
       let currDate = null
       if (key === 'first') {
-        currDate = new Date(this.startActiveYear, this.startActiveMonth, result)
+        currDate = new Date(this.startActiveYear, this.activeMonthStart, result)
       } else {
         currDate = new Date(this.startActiveYear, this.startNextActiveMonth, result)
       }
@@ -300,20 +313,20 @@ export default {
         (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime())
     },
     goPrevMonth () {
-      const prevMonth = new Date(this.startActiveYear, this.startActiveMonth, 0)
-      this.startActiveMonth = prevMonth.getMonth()
+      const prevMonth = new Date(this.startActiveYear, this.activeMonthStart, 0)
+      this.activeMonthStart = prevMonth.getMonth()
       this.startActiveYear = prevMonth.getFullYear()
     },
     goNextMonth () {
       const nextMonth = new Date(this.startActiveYear, this.startNextActiveMonth, 1)
-      this.startActiveMonth = nextMonth.getMonth()
+      this.activeMonthStart = nextMonth.getMonth()
       this.startActiveYear = nextMonth.getFullYear()
     },
     updatePreset (item) {
       this.presetActive = item.label
       this.dateRange = item.dateRange
       // update start active month
-      this.startActiveMonth = this.dateRange.start.getMonth()
+      this.activeMonthStart = this.dateRange.start.getMonth()
       this.startActiveYear = this.dateRange.start.getFullYear()
     },
     setDateValue: function () {
