@@ -11,7 +11,7 @@
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
             <i class="right" @click="goNextMonth" v-if="isCompact"></i>
-            {{months[startActiveMonth] +' '+ startActiveYear}}</div>
+            {{months[activeMonthStart] +' '+ startActiveYear}}</div>
             <ul :class="s.daysWeeks">
               <li v-for="item in shortDays">{{item}}</li>
             </ul>
@@ -56,7 +56,7 @@
 
 <script src="./js/rangedate-picker.js"></script>
 
-<style lang="css">
+<style lang="css" scoped>
 
 .input-date{
   display: block;
@@ -113,14 +113,14 @@
   z-index: 9;
 }
 
-.calendar-head h2{
+.calendar-head h2 {
   padding: 20px 0px 0px 20px;
   margin: 0px;
 }
-.close:hover{
+.close :hover {
   cursor: pointer;
 }
-.close:after{
+.close:after {
   content: "❌";
   font-style: normal;
   float: right;
@@ -130,19 +130,19 @@
 .calendar ul {
   list-style-type: none;
 }
-.calendar-wrap{
+.calendar-wrap {
   display: inline-block;
   float:left;
   width: 75%;
   padding: 10px;
 }
-.calendar-range{
+.calendar-range {
   float: left;
   padding: 0 12px;
   border-left: 1px solid #ccc;
-  margin: 15px -2px;
+  margin: -2px;
 }
-.calendar-left-mobile{
+.calendar-left-mobile {
   width: 100% !important;
 }
 
@@ -188,7 +188,7 @@
 }
 
 li.calendar_days_selected {
-  background: #0096d9;
+  background: #005a82;
   color: #fff;
 }
 
@@ -205,7 +205,7 @@ li.calendar_days_in-range {
   width: auto;
   display: block;
 }
-.calendar_preset li.calendar_preset-ranges{
+.calendar_preset li.calendar_preset-ranges {
   padding: 0 30px 0px 10px;
   margin-bottom: 5px;
   cursor: pointer;
@@ -222,7 +222,7 @@ li.calendar_days_in-range {
 }
 .calendar-range-mobile{
   width: 90%;
-  padding: 10px;
+  padding: 2px;
   border-left: none;
   margin: -20px 0px;
 }
@@ -232,7 +232,7 @@ li.calendar_days_in-range {
   background: #f7931e;
   color: #fff;
   border: none;
-  padding: 9px;
+  padding: 5px;
   font-size: 14px;
 }
 </style>
