@@ -194,6 +194,12 @@
   line-height: 2em;
 }
 
+.calendar_preset li {
+  line-height: 2.6em;
+  width: auto;
+  display: block;
+}
+
 .calendar_days li:hover {
   background: #eee;
   color: #000;
@@ -211,12 +217,6 @@ li.calendar_days_in-range {
 
 .calendar_preset {
   padding: 0;
-}
-
-.calendar_preset li {
-  line-height: 2.6em;
-  width: auto;
-  display: block;
 }
 
 .calendar_preset li.calendar_preset-ranges {
