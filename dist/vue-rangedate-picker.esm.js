@@ -400,13 +400,14 @@ var defaultStyle = {
 var defaultPresets = {
   today: function () {
     var n = new Date();
-    var today = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1);
+    var startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0);
+    var endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59);
     return {
       label: presetRangeLabel[defaultI18n].today,
       active: false,
       dateRange: {
-        start: today,
-        end: today
+        start: startToday,
+        end: endToday
       }
     }
   },
