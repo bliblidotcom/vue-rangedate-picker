@@ -87,7 +87,7 @@ const defaultPresets = {
   },
   last7days: function () {
     const n = new Date()
-    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 6)
+    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5)
     const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
       label: presetRangeLabel[defaultI18n].lastSevenDays,
