@@ -1,6 +1,6 @@
 # VueRangedatePicker
 
-[![npm](https://img.shields.io/npm/v/vue-rangedate-picker.svg)](https://www.npmjs.com/package/vue-rangedate-picker) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/) [![Travis](https://img.shields.io/travis/bliblidotcom/vue-rangedate-picker.svg)](https://travis-ci.org/bliblidotcom/vue-rangedate-picker)
+[![npm](https://img.shields.io/npm/v/vue-rangedate-picker.svg)](https://www.npmjs.com/package/vue-rangedate-picker) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/) [![travis](https://img.shields.io/travis/bliblidotcom/vue-rangedate-picker.svg)](https://travis-ci.org/bliblidotcom/vue-rangedate-picker) [![codecov](https://codecov.io/gh/bliblidotcom/vue-rangedate-picker/branch/master/graph/badge.svg)](https://codecov.io/gh/bliblidotcom/vue-rangedate-picker)
 
 > Date picker with range selection
 
@@ -45,19 +45,19 @@ Vue.use(VueRangedatePicker)
 
 | Props Name                 | Type             | Default Value  | Description                         	|
 |--------------------------- |------------------|--------------- | ------------------------------------	|
-| configs                     | Object           | -              | -                                    |
-| i18n                       | String           | -              | -                                    |
-| months                     | Array            | -              | -                                    |
-| shortDays                  | Array            | -              | -                                    |
-| captions                   | Object           | -              | -                                    |
-| format                     | String           | 'DD MMM YYYY'              | -                                    |
-| styles                     | Object           | -              | -                                    |
+| configs                     | Object           | {}             | -                                    |
+| i18n                       | String           | 'ID'           | For text translation (currently: ID/EN) |
+| months                     | Array            | ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']              | Array months name |
+| shortDays                  | Array            | ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']  |  Array date name in short text     |
+| captions                   | Object           | `{'title': 'Choose Dates','ok_button': 'Apply'}`              | Caption text like title and apply button                                    |
+| format                     | String           | 'DD MMM YYYY'              | Date format                                   |
+| styles                     | Object           | `{daysWeeks: 'calendar_weeks', days: 'calendar_days', daysSelected: 'calendar_days_selected', daysInRange: 'calendar_days_in-range', firstDate: 'calendar_month_left', secondDate: 'calendar_month_right', presetRanges: 'calendar_preset-ranges'}`              | Object set that contains classes use in calendar |
 | initRange                  | Object           | -              | -                                    |
 | startActiveMonth           | Number           | `new Date().getMonth()`    | -                                    |
 | startActiveYear            | Number           | `new Date().getFullYear()` | -                                    |
 | presetRanges               | Object           | -              | -                                    |
-| compact                    | String           | 'false'        | -                                    |
-| righttoleft                | String           | 'false'        | -                                    |
+| compact                    | String           | 'false'        | For set date to always shown |
+| righttoleft                | String           | 'false'        | For set date box align from right |
 
 
 ## Development
