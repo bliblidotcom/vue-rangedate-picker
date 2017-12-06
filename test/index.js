@@ -10,7 +10,8 @@ Object.assign = objectAssign
 // require all src files for coverage.
 // you can also change this to match only the subset of files that
 // you want coverage for.
-const srcContext = require.context('../src', true, /^\.\/(?!index(\.js)?$)/)
+
+const srcContext = require.context('../src', true, /^\.\/(?!index(\.js)?$)(?!build)(?!dist)/)
 srcContext.keys().forEach(srcContext)
 
 // Use a div to insert elements
