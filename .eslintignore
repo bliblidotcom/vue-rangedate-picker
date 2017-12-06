@@ -1,4 +1,4 @@
-dist/*
-build/*
-demo/*
-node_modules/*
+dist/
+build/
+demo/
+node_modules/
