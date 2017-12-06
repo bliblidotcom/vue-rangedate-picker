@@ -1,44 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Demo Range datepicker</title>
-    <link rel="stylesheet" href="/vue-rangedate-picker/dist/vue-rangedate-picker.min.css"/>
-    <style>
-      .block{
-        display: flex;
-        float:left;
-        width:300px;
-        margin-right: 200px;
-      }
-      .wrap-cal{
-        display: block;
-        margin-top: 50px;
-        position: absolute;
-      }
-    </style>
-  </head>
-  <body>
-      <div id="app">
-        <h2>Demo datepicker</h2>
-        <div class="block">
-            start date : {{ date1.start }} <br>
-            end date : {{ date1.end }} <br>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="language" content="en-EN" />
+
+  <title>Vue-Rangedate-Picker | Demo</title>
+  
+  <link rel="stylesheet" href="/vue-rangedate-picker/dist/vue-rangedate-picker.min.css" />
+
+  <!-- VENDOR CSS start -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- VENDOR CSS end -->
+
+  <style>
+    .block {
+      display: flex;
+      float: left;
+      width: 300px;
+      margin-right: 200px;
+    }
+
+    .wrap-cal {
+      display: block;
+      margin-top: 50px;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <section class="hero is-primary is-medium">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <figure class="image is-128x128" style="margin:auto;">
+            <img src="https://github.com/vuejs/awesome-vue/raw/master/logo.svg?sanitize=true">
+          </figure>
+
+          <h1 class="title">
+            Vue-Rangedate-Picker
+          </h1>
+          <h2 class="subtitle">
+            Range date picker with simple usage
+          </h2>
+          <a class="button is-primary is-inverted is-outlined" href="https://github.com/bliblidotcom/vue-rangedate-picker">
+            <i class="fa fa-github-alt" aria-hidden="true"></i> Fork in Github
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container is-fluid" style="margin-top: 20px;">
+
+      <div class="columns is-centered">
+        <div class="column is-8">
+
+          <div class="block">
+            start date : {{ date1.start }}
+            <br> end date : {{ date1.end }}
+            <br>
             <div class="wrap-cal">
               <rangedate-picker @selected="date1Selected" compact="true"></rangedate-picker>
             </div>
+          </div>
+
         </div>
-        <div class="block">
-            start date : {{ date2.start }} <br>
-            end date : {{ date2.end }} <br>
+      </div>
+
+
+      <div class="columns is-centered">
+        <div class="column is-8">
+
+          <div class="block">
+            start date : {{ date2.start }}
+            <br> end date : {{ date2.end }}
+            <br>
             <div class="wrap-cal">
               <rangedate-picker @selected="date2Selected"></rangedate-picker>
               <rangedate-picker @selected="date2Selected" righttoleft="true" i18n="EN"></rangedate-picker>
             </div>
           </div>
+
+        </div>
       </div>
-      <script src="https://unpkg.com/vue@2.5.9/dist/vue.js" type="text/javascript"></script>
-      <script src="/vue-rangedate-picker/dist/vue-rangedate-picker.js" type="text/javascript"></script>
-      <script src="src/main.js" type="text/javascript"></script>
-  </body>
+
+    </div>
+
+  </div>
+
+  <footer class="columns has-text-centered">
+    <div class="column">
+      <a href="https://bulma.io" target="_blank">
+        <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+      </a>
+      <br>
+      <small>Copyright © 2017 by
+        <a href="https://github.com/bliblidotcom" target="_blank">Blibli.com</a>
+      </small>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/vue@2.5.9/dist/vue.js" type="text/javascript"></script>
+  <script src="/vue-rangedate-picker/dist/vue-rangedate-picker.js" type="text/javascript"></script>
+  <script src="src/main.js" type="text/javascript"></script>
+</body>
+
 </html>
