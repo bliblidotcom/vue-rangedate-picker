@@ -7,57 +7,44 @@
   <meta name="language" content="en-EN" />
 
   <title>Vue-Rangedate-Picker | Demo</title>
-  
+
   <link rel="stylesheet" href="/vue-rangedate-picker/dist/vue-rangedate-picker.min.css" />
 
   <!-- VENDOR CSS start -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- VENDOR CSS end -->
-
-  <style>
-    .block {
-      display: flex;
-      float: left;
-      width: 300px;
-      margin-right: 200px;
-    }
-
-    .wrap-cal {
-      display: block;
-      margin-top: 50px;
-      position: absolute;
-    }
-  </style>
 </head>
 
 <body>
-  <div id="app">
 
-    <section class="hero is-primary is-medium">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <figure class="image is-128x128" style="margin:auto;">
-            <img src="https://github.com/vuejs/awesome-vue/raw/master/logo.svg?sanitize=true">
-          </figure>
+  <header class="hero is-primary is-medium">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <figure class="image is-128x128" style="margin:auto;">
+          <img src="https://github.com/vuejs/awesome-vue/raw/master/logo.svg?sanitize=true">
+        </figure>
 
-          <h1 class="title">
-            Vue-Rangedate-Picker
-          </h1>
-          <h2 class="subtitle">
-            Range date picker with simple usage
-          </h2>
-          <a class="button is-primary is-inverted is-outlined" href="https://github.com/bliblidotcom/vue-rangedate-picker">
-            <i class="fa fa-github-alt" aria-hidden="true"></i> Fork in Github
-          </a>
-        </div>
+        <h1 class="title">
+          Vue-Rangedate-Picker
+        </h1>
+        <h2 class="subtitle">
+          Range date picker with simple usage
+        </h2>
+        <a class="button is-primary is-inverted is-outlined" href="https://github.com/bliblidotcom/vue-rangedate-picker">
+          <i class="fa fa-github-alt" aria-hidden="true"></i> Fork in Github
+        </a>
       </div>
-    </section>
+    </div>
+  </header>
+
+  <main id="app">
 
     <div class="container is-fluid" style="margin-top: 20px;">
 
+
       <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column">
 
           <div class="block">
             start date : {{ date1.start }}
@@ -69,11 +56,8 @@
           </div>
 
         </div>
-      </div>
 
-
-      <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column">
 
           <div class="block">
             start date : {{ date2.start }}
@@ -90,17 +74,19 @@
 
     </div>
 
-  </div>
+  </main>
 
-  <footer class="columns has-text-centered">
-    <div class="column">
-      <a href="https://bulma.io" target="_blank">
-        <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
-      </a>
-      <br>
-      <small>Copyright © 2017 by
-        <a href="https://github.com/bliblidotcom" target="_blank">Blibli.com</a>
-      </small>
+  <footer class="container">
+    <div class="columns has-text-centered">
+      <div class="column">
+        <a href="https://bulma.io" target="_blank">
+          <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+        </a>
+        <br>
+        <small>Copyright © 2017 by
+          <a href="https://github.com/bliblidotcom" target="_blank">Blibli.com</a>
+        </small>
+      </div>
     </div>
   </footer>
 
