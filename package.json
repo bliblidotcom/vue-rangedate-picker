@@ -26,7 +26,7 @@
     "dev": "webpack-dashboard -- webpack-dev-server --config build/webpack.config.dev.js --open",
     "dev:coverage": "cross-env BABEL_ENV=test karma start test/karma.conf.js",
     "prepublish": "yon run build",
-    "postinstall": "build:dll"
+    "postinstall": "npm run build:dll"
   },
   "lint-staged": {
     "*.{vue,jsx,js}": [
