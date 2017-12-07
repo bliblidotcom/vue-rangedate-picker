@@ -40,25 +40,151 @@ Vue.use(VueRangedatePicker)
 <script src="https://unpkg.com/vue-rangedate-picker"></script>
 ```
 
+### Available Events
+
+You can catch these below Events to `<rangedate-picker @events="events"></rangedate-picker>` template :
+
++ **selected**
+
+  *Description* : function that will `$emit` when datepicker set value, this function will get parameter response :
+  ```javascript
+  {
+    start: dateObjectStart
+    end: dateObjectEnd
+  }
+  ```
+
 ### Available Props
 
+You can pass these below props to `<rangedate-picker :props="props"></rangedate-picker>` template :
 
-| Props Name                 | Type             | Default Value  | Description                         	|
-|--------------------------- |------------------|--------------- | ------------------------------------	|
-| configs                     | Object           | {}             | -                                    |
-| i18n                       | String           | 'ID'           | For text translation (currently: ID/EN) |
-| months                     | Array            | ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']              | Array months name |
-| shortDays                  | Array            | ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']  |  Array date name in short text     |
-| captions                   | Object           | `{'title': 'Choose Dates','ok_button': 'Apply'}`              | Caption text like title and apply button                                    |
-| format                     | String           | 'DD MMM YYYY'              | Date format                                   |
-| styles                     | Object           | `{daysWeeks: 'calendar_weeks', days: 'calendar_days', daysSelected: 'calendar_days_selected', daysInRange: 'calendar_days_in-range', firstDate: 'calendar_month_left', secondDate: 'calendar_month_right', presetRanges: 'calendar_preset-ranges'}`              | Object set that contains classes use in calendar |
-| initRange                  | Object           | -              | -                                    |
-| startActiveMonth           | Number           | `new Date().getMonth()`    | -                                    |
-| startActiveYear            | Number           | `new Date().getFullYear()` | -                                    |
-| presetRanges               | Object           | -              | -                                    |
-| compact                    | String           | 'false'        | For set date to always shown |
-| righttoleft                | String           | 'false'        | For set date box align from right |
++ **configs**
 
+  *Description* : -
+
+  *Type* : Object
+
+  *Default Value* : `{}`
+
++ **i18n**
+
+  *Description* : For text translation (currently: ID/EN)
+
+  *Type* : String
+
+  *Default Value* : `'ID'`
+
++ **months**
+
+  *Description* : Array of months name
+
+  *Type* : Array
+
+  *Default Value* : 
+  ```javascript
+  ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
+   'Agustus', 'September', 'Oktober', 'November', 'Desember']
+  ```
+
++ **shortDays**
+
+  *Description* : Array of days name in short
+
+  *Type* : Array
+
+  *Default Value* : 
+  ```javascript
+  ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
+  ```
+
++ **captions**
+
+  *Description* : Object for text title and OK button
+
+  *Type* : Object
+
+  *Default Value* : 
+  ```javascript
+  {
+    'title': 'Choose Dates',
+    'ok_button': 'Apply'
+  }
+  ```
+
++ **format**
+
+  *Description* : Date format
+
+  *Type* : String
+
+  *Default Value* : `'DD MMM YYYY'`
+
++ **styles**
+
+  *Description* : -
+
+  *Type* : Object
+
+  *Default Value* : 
+  ```javascript
+  {
+    daysWeeks: 'calendar_weeks',
+    days: 'calendar_days',
+    daysSelected: 'calendar_days_selected',
+    daysInRange: 'calendar_days_in-range',
+    firstDate: 'calendar_month_left',
+    secondDate: 'calendar_month_right',
+    presetRanges: 'calendar_preset-ranges'
+  }
+  ```
+
++ **initRange**
+
+  *Description* : -
+
+  *Type* : Object
+
+  *Default Value* : `null`
+
++ **startActiveMonth**
+
+  *Description* : Month will be shown in first launch
+
+  *Type* : Number
+
+  *Default Value* : `new Date().getMonth()`
+
++ **startActiveYear**
+
+  *Description* : Year will be shown in first launch
+
+  *Type* : Number
+
+  *Default Value* : `new Date().getFullYear()`
+
++ **presetRanges**
+
+  *Description* : -
+
+  *Type* : Object
+
+  *Default Value* : `{}`
+
++ **compact**
+
+  *Description* : Set to `'true'` if you want to make datepicker always shown in compact mode
+
+  *Type* : String
+
+  *Default Value* : `'false'`
+
++ **righttoleft**
+
+  *Description* : Set to `'true'` if you want datepicker shown align to `right`
+
+  *Type* : String
+
+  *Default Value* : `'false'`
 
 ## Development
 
