@@ -9,17 +9,22 @@ var app = new Vue({
       date2: {
         start: '',
         end: ''
+      },
+      date3: {
+        start: '',
+        end: ''
       }
     }
   },
   methods: {
-    date1Selected: function (a) {
-      this.date1.start = a.start
-      this.date1.end = a.end
+    date1Selected: function (daterange) {
+      this.date1 = daterange
     },
-    date2Selected: function (a) {
-      this.date2.start = a.start
-      this.date2.end = a.end
+    date2Selected: function (daterange) {
+      this.date2 = daterange
+    },
+    date3Selected: function (daterange) {
+      this.date3 = daterange
     }
   },
   components: {
