@@ -19,9 +19,11 @@
     .main {
       min-height: 500px;
     }
-
     .compact-wrapper {
       min-height: 350px;
+    }
+    .card{
+      padding: 1em;
     }
   </style>
 </head>
@@ -59,8 +61,8 @@
             <p class="subtitle is-6">End Date : {{ date1.end }}</p>
 
             <div class="card-content">
-              <div class="compact-wrapper content">
-                <rangedate-picker @selected="date1Selected" compact="true" i18n="EN" format="'YYYY-MM-DD'">
+              <div class="compact-wrapper">
+                <rangedate-picker @selected="date1Selected" compact="true" i18n="EN">
                 </rangedate-picker>
               </div>
             </div>
@@ -75,8 +77,8 @@
             <p class="subtitle is-6">End Date : {{ date2.end }}</p>
 
             <div class="card-content">
-              <div class="content">
-                <rangedate-picker @selected="date2Selected" i18n="EN" format="'YYYY-MM-DD'">
+              <div class="daterange-wrapper">
+                <rangedate-picker @selected="date2Selected" i18n="EN">
                 </rangedate-picker>
               </div>
             </div>
@@ -91,8 +93,8 @@
             <p class="subtitle is-6">End Date : {{ date3.end }}</p>
 
             <div class="card-content">
-              <div class="content">
-                <rangedate-picker @selected="date3Selected" i18n="EN" format="YYYY-MM-DD" righttoleft="true">
+              <div class="daterange-wrapper">
+                <rangedate-picker @selected="date3Selected" i18n="EN" righttoleft="true">
                 </rangedate-picker>
               </div>
             </div>
