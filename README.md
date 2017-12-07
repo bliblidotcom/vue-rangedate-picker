@@ -40,7 +40,23 @@ Vue.use(VueRangedatePicker)
 <script src="https://unpkg.com/vue-rangedate-picker"></script>
 ```
 
+### Available Events
+
+You can catch these below Events to `<rangedate-picker @events="events"></rangedate-picker>` template :
+
++ **selected**
+
+  *Description* : function that will `$emit` when datepicker set value, this function will get parameter response :
+  ```javascript
+  {
+    start: dateObjectStart
+    end: dateObjectEnd
+  }
+  ```
+
 ### Available Props
+
+You can pass these below props to `<rangedate-picker :props="props"></rangedate-picker>` template :
 
 + **configs**
 
@@ -66,7 +82,8 @@ Vue.use(VueRangedatePicker)
 
   *Default Value* : 
   ```javascript
-  ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+  ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
+   'Agustus', 'September', 'Oktober', 'November', 'Desember']
   ```
 
 + **shortDays**
