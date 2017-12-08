@@ -52,7 +52,7 @@ const defaultPresets = {
     const startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0)
     const endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59)
     return {
-      label: presetRangeLabel[defaultI18n].today,
+      label: presetRangeLabel[this.i18n].today,
       active: false,
       dateRange: {
         start: startToday,
@@ -65,7 +65,7 @@ const defaultPresets = {
     const startMonth = new Date(n.getFullYear(), n.getMonth(), 2)
     const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1)
     return {
-      label: presetRangeLabel[defaultI18n].thisMonth,
+      label: presetRangeLabel[this.i18n].thisMonth,
       active: false,
       dateRange: {
         start: startMonth,
@@ -78,7 +78,7 @@ const defaultPresets = {
     const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
     const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
     return {
-      label: presetRangeLabel[defaultI18n].lastMonth,
+      label: presetRangeLabel[this.i18n].lastMonth,
       active: false,
       dateRange: {
         start: startMonth,
@@ -91,7 +91,7 @@ const defaultPresets = {
     const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5)
     const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
-      label: presetRangeLabel[defaultI18n].lastSevenDays,
+      label: presetRangeLabel[this.i18n].lastSevenDays,
       active: false,
       dateRange: {
         start: start,
@@ -104,7 +104,7 @@ const defaultPresets = {
     const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29)
     const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
     return {
-      label: presetRangeLabel[defaultI18n].lastThirtyDays,
+      label: presetRangeLabel[this.i18n].lastThirtyDays,
       active: false,
       dateRange: {
         start: start,
@@ -126,11 +126,11 @@ export default {
     },
     months: {
       type: Array,
-      default: () => availableMonths[defaultI18n]
+      default: () => availableMonths[this.i18n]
     },
     shortDays: {
       type: Array,
-      default: () => availableShortDays[defaultI18n]
+      default: () => availableShortDays[this.i18n]
     },
     // options for captions are: title, ok_button
     captions: {
