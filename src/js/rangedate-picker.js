@@ -128,11 +128,15 @@ export default {
     },
     months: {
       type: Array,
-      default: () => availableMonths[this.i18n]
+      default: function () {
+        return availableMonths[this.i18n]
+      }
     },
     shortDays: {
       type: Array,
-      default: () => availableShortDays[this.i18n]
+      default: function () {
+        return availableShortDays[this.i18n]
+      }
     },
     // options for captions are: title, ok_button
     captions: {
@@ -161,7 +165,9 @@ export default {
     },
     presetRanges: {
       type: Object,
-      default: () => defaultPresets(this.i18n)
+      default: function () {
+        return defaultPresets[this.i18n]
+      }
     },
     compact: {
       type: String,

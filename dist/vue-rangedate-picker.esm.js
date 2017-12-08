@@ -351,7 +351,6 @@ var fecha = createCommonjsModule(function (module) {
 })(commonjsGlobal);
 });
 
-var this$1 = undefined;
 var defaultConfig = {};
 var defaultI18n = 'ID';
 var availableMonths = {
@@ -480,11 +479,15 @@ var __vue_module__ = {
     },
     months: {
       type: Array,
-      default: function () { return availableMonths[this$1.i18n]; }
+      default: function () {
+        return availableMonths[this.i18n]
+      }
     },
     shortDays: {
       type: Array,
-      default: function () { return availableShortDays[this$1.i18n]; }
+      default: function () {
+        return availableShortDays[this.i18n]
+      }
     },
     // options for captions are: title, ok_button
     captions: {
@@ -513,7 +516,9 @@ var __vue_module__ = {
     },
     presetRanges: {
       type: Object,
-      default: function () { return defaultPresets(this$1.i18n); }
+      default: function () {
+        return defaultPresets[this.i18n]
+      }
     },
     compact: {
       type: String,
