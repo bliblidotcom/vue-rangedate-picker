@@ -161,7 +161,7 @@ export default {
     },
     presetRanges: {
       type: Object,
-      default: {}
+      default: null
     },
     compact: {
       type: String,

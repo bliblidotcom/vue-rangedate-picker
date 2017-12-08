@@ -516,7 +516,7 @@ var __vue_module__ = {
     },
     presetRanges: {
       type: Object,
-      default: {}
+      default: null
     },
     compact: {
       type: String,
