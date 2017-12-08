@@ -549,11 +549,11 @@ var __vue_module__ = {
     if (this.isCompact) {
       this.isOpen = true;
     }
-    if (this.activeMonthStart === 11) { this.activeYearEnd += 1; }
+    if (this.activeMonthStart === 11) { this.activeYearEnd = this.activeYearStart + 1; }
   },
   watch: {
     startNextActiveMonth: function (value) {
-      if (value === 0) { this.activeYearEnd += 1; }
+      if (value === 0) { this.activeYearEnd = this.activeYearStart + 1; }
     }
   },
   computed: {
