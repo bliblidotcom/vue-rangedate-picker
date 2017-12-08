@@ -114,7 +114,8 @@
   width: 700px;
   font-size: 12px;
   height: 300px;
-  box-shadow: -3px 4px 12px -1px #ccc;
+  -webkit-box-shadow: -3px 4px 12px -1px #ccc;
+          box-shadow: -3px 4px 12px -1px #ccc;
   background: #fff;
   position: absolute;
   z-index: 9;
@@ -233,7 +234,8 @@ li.calendar_days_in-range {
 .calendar-mobile {
   width: 260px;
   z-index: 1;
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .calendar-range-mobile {
