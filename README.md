@@ -167,8 +167,43 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
   *Description* : -
 
   *Type* : Object
+  Example : 
+  ```javascript
+  {
+    today: function () {
+      const n = new Date()
+      const startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0)
+      const endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59)
+      return {
+        label: presetRangeLabel[i18n].today,
+        active: false,
+        dateRange: {
+          start: startToday,
+          end: endToday
+        }
+      }
+    }
+  }
+  ```
 
-  *Default Value* : `{}`
+  *Default Value* : 
+  ```javascript
+  {
+    today: function () {
+      return {
+        // label: 'string', active: 'boolean', dateRange: {start: date, end: end}
+      }
+    },
+    thisMonth: function () {
+    },
+    lastMonth: function () {
+    },
+    last7days: function () {
+    },
+    last30days: function () {
+    }
+  }
+  ```
 
 + **compact**
 
