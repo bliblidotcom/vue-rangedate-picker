@@ -268,7 +268,7 @@ export default {
       // bound by > 0 and < last day of month
       return result > 0 && result <= endMonthDate ? result : '&nbsp;'
     },
-    getNewDateRange (result, activeMonth) {
+    getNewDateRange (result, activeMonth, activeYear) {
       const newData = {}
       let key = 'start'
       if (!this.isFirstChoice) {
@@ -276,7 +276,7 @@ export default {
       } else {
         newData['end'] = null
       }
-      const resultDate = new Date(this.activeYearStart, activeMonth, result)
+      const resultDate = new Date(activeYear, activeMonth, result)
       if (!this.isFirstChoice && resultDate < this.dateRange.start) {
         this.isFirstChoice = false
         return { start: resultDate }
@@ -289,7 +289,7 @@ export default {
     },
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
-      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart))
+      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
         if (this.isCompact) {
@@ -299,7 +299,7 @@ export default {
     },
     selectSecondItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay) + 1
-      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth))
+      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth, this.activeYearEnd))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
       }
