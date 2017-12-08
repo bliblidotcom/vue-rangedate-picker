@@ -1,5 +1,5 @@
 /*!
- * vue-rangedate-picker v0.2.2
+ * vue-rangedate-picker v0.2.3
  * (c) 2017 hidayat.febiansyah
  * Released under the MIT License.
  */
@@ -477,11 +477,11 @@ var __vue_module__ = {
     },
     months: {
       type: Array,
-      default: function () { return availableMonths[defaultI18n]; }
+      default: function () { return null; }
     },
     shortDays: {
       type: Array,
-      default: function () { return availableShortDays[defaultI18n]; }
+      default: function () { return null; }
     },
     // options for captions are: title, ok_button
     captions: {
@@ -539,6 +539,12 @@ var __vue_module__ = {
     }
   },
   computed: {
+    monthsLocale: function () {
+      return this.months || availableMonths[this.i18n]
+    },
+    shortDaysLocale: function () {
+      return this.shortDays || availableShortDays[this.i18n]
+    },
     s: function () {
       return Object.assign({}, defaultStyle, this.style)
     },
@@ -694,9 +700,9 @@ var __vue_module__ = {
   }
 };
 
-var __$__vue_module__ = Object.assign(__vue_module__, {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"calendar-root"},[_c('div',{staticClass:"input-date",on:{"click":function($event){_vm.toggleCalendar();}}},[_vm._v(" "+_vm._s(_vm.getDateString(_vm.dateRange.start))+" - "+_vm._s(_vm.getDateString(_vm.dateRange.end)))]),_vm._v(" "),(_vm.isOpen)?_c('div',{staticClass:"calendar",class:{'calendar-mobile ': _vm.isCompact, 'calendar-right-to-left': _vm.isRighttoLeft}},[(!_vm.isCompact)?_c('div',{staticClass:"calendar-head"},[_c('h2',[_vm._v(_vm._s(_vm.captions.title))]),_vm._v(" "),_c('i',{staticClass:"close",on:{"click":function($event){_vm.toggleCalendar();}}})]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"calendar-wrap"},[(_vm.showMonth)?_c('div',{staticClass:"calendar_month_left",class:{'calendar-left-mobile': _vm.isCompact}},[_c('div',{staticClass:"months-text"},[_c('i',{staticClass:"left",on:{"click":_vm.goPrevMonth}}),_vm._v(" "),(_vm.isCompact)?_c('i',{staticClass:"right",on:{"click":_vm.goNextMonth}}):_vm._e(),_vm._v(" "+_vm._s(_vm.months[_vm.activeMonthStart] +' '+ _vm.startActiveYear))]),_vm._v(" "),_c('ul',{class:_vm.s.daysWeeks},_vm._l((_vm.shortDays),function(item){return _c('li',[_vm._v(_vm._s(item))])})),_vm._v(" "),_vm._l((6),function(r){return _c('ul',{class:[_vm.s.days]},_vm._l((_vm.numOfDays),function(i){return _c('li',{class:[( obj = {}, obj[_vm.s.daysSelected] = _vm.isDateSelected(r, i, 'first', _vm.startMonthDay, _vm.endMonthDate), obj[_vm.s.daysInRange] = _vm.isDateInRange(r, i, 'first', _vm.startMonthDay, _vm.endMonthDate), obj )],domProps:{"innerHTML":_vm._s(_vm.getDayCell(r, i, _vm.startMonthDay, _vm.endMonthDate))},on:{"click":function($event){_vm.selectFirstItem(r, i);}}})
-    var obj;}))})],2):_vm._e(),_vm._v(" "),(!_vm.isCompact)?_c('div',{staticClass:"calendar_month_right"},[_c('div',{staticClass:"months-text"},[_vm._v(" "+_vm._s(_vm.months[_vm.startNextActiveMonth] +' '+ _vm.startActiveYear)+" "),_c('i',{staticClass:"right",on:{"click":_vm.goNextMonth}})]),_vm._v(" "),_c('ul',{class:_vm.s.daysWeeks},_vm._l((_vm.shortDays),function(item){return _c('li',[_vm._v(_vm._s(item))])})),_vm._v(" "),_vm._l((6),function(r){return _c('ul',{class:[_vm.s.days]},_vm._l((_vm.numOfDays),function(i){return _c('li',{class:[( obj = {}, obj[_vm.s.daysSelected] = _vm.isDateSelected(r, i, 'second', _vm.startNextMonthDay, _vm.endNextMonthDate), obj[_vm.s.daysInRange] = _vm.isDateInRange(r, i, 'second', _vm.startNextMonthDay, _vm.endNextMonthDate), obj )],domProps:{"innerHTML":_vm._s(_vm.getDayCell(r, i, _vm.startNextMonthDay, _vm.endNextMonthDate))},on:{"click":function($event){_vm.selectSecondItem(r, i);}}})
-    var obj;}))})],2):_vm._e()]),_vm._v(" "),(!_vm.showMonth || !_vm.isCompact)?_c('div',{staticClass:"calendar-range",class:{'calendar-range-mobile ': _vm.isCompact}},[_c('ul',{staticClass:"calendar_preset"},[_vm._l((_vm.finalPresetRanges),function(item,idx){return _c('li',{key:idx,staticClass:"calendar_preset-ranges",class:{'active-preset': _vm.presetActive === item.label},on:{"click":function($event){_vm.updatePreset(item);}}},[_vm._v(" "+_vm._s(item.label)+" ")])}),_vm._v(" "),_c('li',[_c('button',{staticClass:"calendar-btn-apply",on:{"click":function($event){_vm.setDateValue();}}},[_vm._v(_vm._s(_vm.captions.ok_button))])])],2)]):_vm._e()]):_vm._e()])},staticRenderFns: [],_scopeId: 'data-v-15f62e23',});
+var __$__vue_module__ = Object.assign(__vue_module__, {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"calendar-root"},[_c('div',{staticClass:"input-date",on:{"click":function($event){_vm.toggleCalendar();}}},[_vm._v(" "+_vm._s(_vm.getDateString(_vm.dateRange.start))+" - "+_vm._s(_vm.getDateString(_vm.dateRange.end)))]),_vm._v(" "),(_vm.isOpen)?_c('div',{staticClass:"calendar",class:{'calendar-mobile ': _vm.isCompact, 'calendar-right-to-left': _vm.isRighttoLeft}},[(!_vm.isCompact)?_c('div',{staticClass:"calendar-head"},[_c('h2',[_vm._v(_vm._s(_vm.captions.title))]),_vm._v(" "),_c('i',{staticClass:"close",on:{"click":function($event){_vm.toggleCalendar();}}})]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"calendar-wrap"},[(_vm.showMonth)?_c('div',{staticClass:"calendar_month_left",class:{'calendar-left-mobile': _vm.isCompact}},[_c('div',{staticClass:"months-text"},[_c('i',{staticClass:"left",on:{"click":_vm.goPrevMonth}}),_vm._v(" "),(_vm.isCompact)?_c('i',{staticClass:"right",on:{"click":_vm.goNextMonth}}):_vm._e(),_vm._v(" "+_vm._s(_vm.monthsLocale[_vm.activeMonthStart] +' '+ _vm.startActiveYear))]),_vm._v(" "),_c('ul',{class:_vm.s.daysWeeks},_vm._l((_vm.shortDaysLocale),function(item){return _c('li',[_vm._v(_vm._s(item))])})),_vm._v(" "),_vm._l((6),function(r){return _c('ul',{class:[_vm.s.days]},_vm._l((_vm.numOfDays),function(i){return _c('li',{class:[( obj = {}, obj[_vm.s.daysSelected] = _vm.isDateSelected(r, i, 'first', _vm.startMonthDay, _vm.endMonthDate), obj[_vm.s.daysInRange] = _vm.isDateInRange(r, i, 'first', _vm.startMonthDay, _vm.endMonthDate), obj )],domProps:{"innerHTML":_vm._s(_vm.getDayCell(r, i, _vm.startMonthDay, _vm.endMonthDate))},on:{"click":function($event){_vm.selectFirstItem(r, i);}}})
+    var obj;}))})],2):_vm._e(),_vm._v(" "),(!_vm.isCompact)?_c('div',{staticClass:"calendar_month_right"},[_c('div',{staticClass:"months-text"},[_vm._v(" "+_vm._s(_vm.monthsLocale[_vm.startNextActiveMonth] +' '+ _vm.startActiveYear)+" "),_c('i',{staticClass:"right",on:{"click":_vm.goNextMonth}})]),_vm._v(" "),_c('ul',{class:_vm.s.daysWeeks},_vm._l((_vm.shortDaysLocale),function(item){return _c('li',[_vm._v(_vm._s(item))])})),_vm._v(" "),_vm._l((6),function(r){return _c('ul',{class:[_vm.s.days]},_vm._l((_vm.numOfDays),function(i){return _c('li',{class:[( obj = {}, obj[_vm.s.daysSelected] = _vm.isDateSelected(r, i, 'second', _vm.startNextMonthDay, _vm.endNextMonthDate), obj[_vm.s.daysInRange] = _vm.isDateInRange(r, i, 'second', _vm.startNextMonthDay, _vm.endNextMonthDate), obj )],domProps:{"innerHTML":_vm._s(_vm.getDayCell(r, i, _vm.startNextMonthDay, _vm.endNextMonthDate))},on:{"click":function($event){_vm.selectSecondItem(r, i);}}})
+    var obj;}))})],2):_vm._e()]),_vm._v(" "),(!_vm.showMonth || !_vm.isCompact)?_c('div',{staticClass:"calendar-range",class:{'calendar-range-mobile ': _vm.isCompact}},[_c('ul',{staticClass:"calendar_preset"},[_vm._l((_vm.finalPresetRanges),function(item,idx){return _c('li',{key:idx,staticClass:"calendar_preset-ranges",class:{'active-preset': _vm.presetActive === item.label},on:{"click":function($event){_vm.updatePreset(item);}}},[_vm._v(" "+_vm._s(item.label)+" ")])}),_vm._v(" "),_c('li',[_c('button',{staticClass:"calendar-btn-apply",on:{"click":function($event){_vm.setDateValue();}}},[_vm._v(_vm._s(_vm.captions.ok_button))])])],2)]):_vm._e()]):_vm._e()])},staticRenderFns: [],_scopeId: 'data-v-5e837f70',});
     __$__vue_module__.prototype = __vue_module__.prototype;
 
 function plugin (Vue) {
@@ -708,6 +714,6 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
-var version = '0.2.2';
+var version = '0.2.3';
 
 export { __$__vue_module__ as RangedatePicker, version };export default plugin;

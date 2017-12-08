@@ -11,9 +11,9 @@
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
             <i class="right" @click="goNextMonth" v-if="isCompact"></i>
-            {{months[activeMonthStart] +' '+ startActiveYear}}</div>
+            {{monthsLocale[activeMonthStart] +' '+ startActiveYear}}</div>
             <ul :class="s.daysWeeks">
-              <li v-for="item in shortDays">{{item}}</li>
+              <li v-for="item in shortDaysLocale">{{item}}</li>
             </ul>
             <ul v-for="r in 6" :class="[s.days]">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
@@ -23,11 +23,11 @@
         </div>
         <div class="calendar_month_right" v-if="!isCompact">
           <div class="months-text">
-            {{months[startNextActiveMonth] +' '+ startActiveYear}}
+            {{monthsLocale[startNextActiveMonth] +' '+ startActiveYear}}
             <i class="right" @click="goNextMonth"></i>
           </div>
           <ul :class="s.daysWeeks">
-              <li v-for="item in shortDays">{{item}}</li>
+              <li v-for="item in shortDaysLocale">{{item}}</li>
           </ul>
           <ul v-for="r in 6" :class="[s.days]">
             <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'second', startNextMonthDay, endNextMonthDate),

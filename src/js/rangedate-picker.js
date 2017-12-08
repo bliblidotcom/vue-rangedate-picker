@@ -126,11 +126,11 @@ export default {
     },
     months: {
       type: Array,
-      default: () => availableMonths[defaultI18n]
+      default: () => null
     },
     shortDays: {
       type: Array,
-      default: () => availableShortDays[defaultI18n]
+      default: () => null
     },
     // options for captions are: title, ok_button
     captions: {
@@ -188,6 +188,12 @@ export default {
     }
   },
   computed: {
+    monthsLocale: function () {
+      return this.months || availableMonths[this.i18n]
+    },
+    shortDaysLocale: function () {
+      return this.shortDays || availableShortDays[this.i18n]
+    },
     s: function () {
       return Object.assign({}, defaultStyle, this.style)
     },
