@@ -11,27 +11,27 @@
           <div class="months-text">
             <i class="left" @click="goPrevMonth"></i>
             <i class="right" @click="goNextMonth" v-if="isCompact"></i>
-            {{monthsLocale[activeMonthStart] +' '+ startActiveYear}}</div>
+            {{monthsLocale[activeMonthStart] +' '+ activeYearStart}}</div>
             <ul :class="s.daysWeeks">
-              <li v-for="item in shortDaysLocale">{{item}}</li>
+              <li v-for="item in shortDaysLocale" :key="item">{{item}}</li>
             </ul>
-            <ul v-for="r in 6" :class="[s.days]">
+            <ul v-for="r in 6" :class="[s.days]" :key="r">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
-              [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate)}]" v-for="i in numOfDays" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
+              [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
         <div class="calendar_month_right" v-if="!isCompact">
           <div class="months-text">
-            {{monthsLocale[startNextActiveMonth] +' '+ startActiveYear}}
+            {{monthsLocale[startNextActiveMonth] +' '+ activeYearEnd}}
             <i class="right" @click="goNextMonth"></i>
           </div>
           <ul :class="s.daysWeeks">
-              <li v-for="item in shortDaysLocale">{{item}}</li>
+              <li v-for="item in shortDaysLocale" :key="item">{{item}}</li>
           </ul>
-          <ul v-for="r in 6" :class="[s.days]">
+          <ul v-for="r in 6" :class="[s.days]" :key="r">
             <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'second', startNextMonthDay, endNextMonthDate),
-            [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate)}]" v-for="i in numOfDays" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
+            [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
                   @click="selectSecondItem(r, i)"></li>
           </ul>
         </div>
