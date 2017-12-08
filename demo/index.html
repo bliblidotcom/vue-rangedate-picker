@@ -57,23 +57,6 @@
 
         <div class="column">
           <div class="card">
-            <p class="title is-4">Range Date Compact Mode</p>
-            <br>
-            <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
-            <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
-
-            <div class="card-content">
-              <div class="compact-wrapper">
-                <rangedate-picker @selected="onDateSelected" compact="true" i18n="EN">
-                </rangedate-picker>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
             <p class="title is-4">Range Date Normal Mode</p>
             <br>
             <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
@@ -123,6 +106,26 @@
           </div>
         </div>
 
+      </div>
+      <div class="columns is-centered">
+
+        <div class="column">
+          <div class="card">
+            <p class="title is-4">Range Date Compact Mode</p>
+            <br>
+            <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
+            <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
+
+            <div class="card-content">
+              <div class="compact-wrapper">
+                <rangedate-picker @selected="onDateSelected" compact="true" i18n="EN">
+                </rangedate-picker>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
       </div>
     </div>
   </main>
