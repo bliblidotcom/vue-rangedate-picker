@@ -59,12 +59,12 @@
           <div class="card">
             <p class="title is-4">Range Date Compact Mode</p>
             <br>
-            <p class="subtitle is-6">Start Date : {{ date1.start }}</p>
-            <p class="subtitle is-6">End Date : {{ date1.end }}</p>
+            <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
+            <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
 
             <div class="card-content">
               <div class="compact-wrapper">
-                <rangedate-picker @selected="date1Selected" compact="true" i18n="EN">
+                <rangedate-picker @selected="onDateSelected" compact="true" i18n="EN">
                 </rangedate-picker>
               </div>
             </div>
@@ -76,12 +76,12 @@
           <div class="card">
             <p class="title is-4">Range Date Normal Mode</p>
             <br>
-            <p class="subtitle is-6">Start Date : {{ date2.start }}</p>
-            <p class="subtitle is-6">End Date : {{ date2.end }}</p>
+            <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
+            <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <rangedate-picker @selected="date2Selected" i18n="EN">
+                <rangedate-picker @selected="onDateSelected" i18n="EN">
                 </rangedate-picker>
               </div>
             </div>
@@ -93,12 +93,29 @@
           <div class="card">
             <p class="title is-4">Range Date Right To Left</p>
             <br>
-            <p class="subtitle is-6">Start Date : {{ date3.start }}</p>
-            <p class="subtitle is-6">End Date : {{ date3.end }}</p>
+            <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
+            <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <rangedate-picker @selected="date3Selected" i18n="EN" righttoleft="true">
+                <rangedate-picker @selected="onDateSelected" i18n="EN" righttoleft="true">
+                </rangedate-picker>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card">
+            <p class="title is-4">Range Date Custom Format</p>
+            <br>
+            <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
+            <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
+
+            <div class="card-content">
+              <div class="daterange-wrapper">
+                <rangedate-picker @selected="onDateSelected" i18n="EN" format="YYYY-MM-DD hh:mm:ss">
                 </rangedate-picker>
               </div>
             </div>
