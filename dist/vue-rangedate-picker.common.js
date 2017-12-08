@@ -402,6 +402,8 @@ var defaultStyle = {
 };
 
 var defaultPresets = function (i18n) {
+  if ( i18n === void 0 ) i18n = defaultI18n;
+
   return {
     today: function () {
       var n = new Date();
@@ -504,7 +506,7 @@ var __vue_module__ = {
     },
     initRange: {
       type: Object,
-      default: null
+      default: function () { return null; }
     },
     startActiveMonth: {
       type: Number,
@@ -516,7 +518,7 @@ var __vue_module__ = {
     },
     presetRanges: {
       type: Object,
-      default: null
+      default: function () { return null; }
     },
     compact: {
       type: String,

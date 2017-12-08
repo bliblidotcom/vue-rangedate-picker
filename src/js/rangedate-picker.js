@@ -46,7 +46,7 @@ const defaultStyle = {
   presetRanges: 'calendar_preset-ranges'
 }
 
-const defaultPresets = function (i18n) {
+const defaultPresets = function (i18n = defaultI18n) {
   return {
     today: function () {
       const n = new Date()
@@ -149,7 +149,7 @@ export default {
     },
     initRange: {
       type: Object,
-      default: null
+      default: () => null
     },
     startActiveMonth: {
       type: Number,
@@ -161,7 +161,7 @@ export default {
     },
     presetRanges: {
       type: Object,
-      default: null
+      default: () => null
     },
     compact: {
       type: String,
