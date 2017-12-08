@@ -116,7 +116,7 @@ const defaultPresets = function (i18n) {
   }
 }
 
-export default {
+const RangedatePicker = {
   props: {
     configs: {
       type: Object,
@@ -129,13 +129,13 @@ export default {
     months: {
       type: Array,
       default: function () {
-        return availableMonths[this.i18n]
+        return availableMonths[RangedatePicker.props.i18n]
       }
     },
     shortDays: {
       type: Array,
       default: function () {
-        return availableShortDays[this.i18n]
+        return availableShortDays[RangedatePicker.props.i18n]
       }
     },
     // options for captions are: title, ok_button
@@ -166,7 +166,7 @@ export default {
     presetRanges: {
       type: Object,
       default: function () {
-        return defaultPresets[this.i18n]
+        return defaultPresets[RangedatePicker.props.i18n]
       }
     },
     compact: {
@@ -346,3 +346,5 @@ export default {
     }
   }
 }
+
+export default RangedatePicker
