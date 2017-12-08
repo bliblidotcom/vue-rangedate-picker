@@ -74,14 +74,14 @@
 
         <div class="column">
           <div class="card">
-            <p class="title is-4">Range Date Right To Left</p>
+            <p class="title is-4">Range Date Custom Format</p>
             <br>
             <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
             <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <rangedate-picker @selected="onDateSelected" i18n="EN" righttoleft="true">
+                <rangedate-picker @selected="onDateSelected" i18n="EN" format="YYYY-MM-DD hh:mm:ss">
                 </rangedate-picker>
               </div>
             </div>
@@ -91,14 +91,14 @@
 
         <div class="column">
           <div class="card">
-            <p class="title is-4">Range Date Custom Format</p>
+            <p class="title is-4">Range Date Right To Left</p>
             <br>
             <p class="subtitle is-6">Start Date : {{ selectedDate.start }}</p>
             <p class="subtitle is-6">End Date : {{ selectedDate.end }}</p>
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <rangedate-picker @selected="onDateSelected" i18n="EN" format="YYYY-MM-DD hh:mm:ss">
+                <rangedate-picker @selected="onDateSelected" i18n="EN" righttoleft="true">
                 </rangedate-picker>
               </div>
             </div>
@@ -125,7 +125,7 @@
 
           </div>
         </div>
-        
+
       </div>
     </div>
   </main>
