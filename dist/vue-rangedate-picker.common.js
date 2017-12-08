@@ -401,69 +401,73 @@ var defaultStyle = {
   presetRanges: 'calendar_preset-ranges'
 };
 
-var defaultPresets = {
-  today: function () {
-    var n = new Date();
-    var startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0);
-    var endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59);
-    return {
-      label: presetRangeLabel[defaultI18n].today,
-      active: false,
-      dateRange: {
-        start: startToday,
-        end: endToday
+var defaultPresets = function (i18n) {
+  if ( i18n === void 0 ) i18n = defaultI18n;
+
+  return {
+    today: function () {
+      var n = new Date();
+      var startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0);
+      var endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59);
+      return {
+        label: presetRangeLabel[i18n].today,
+        active: false,
+        dateRange: {
+          start: startToday,
+          end: endToday
+        }
       }
-    }
-  },
-  thisMonth: function () {
-    var n = new Date();
-    var startMonth = new Date(n.getFullYear(), n.getMonth(), 2);
-    var endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1);
-    return {
-      label: presetRangeLabel[defaultI18n].thisMonth,
-      active: false,
-      dateRange: {
-        start: startMonth,
-        end: endMonth
+    },
+    thisMonth: function () {
+      var n = new Date();
+      var startMonth = new Date(n.getFullYear(), n.getMonth(), 2);
+      var endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1);
+      return {
+        label: presetRangeLabel[i18n].thisMonth,
+        active: false,
+        dateRange: {
+          start: startMonth,
+          end: endMonth
+        }
       }
-    }
-  },
-  lastMonth: function () {
-    var n = new Date();
-    var startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2);
-    var endMonth = new Date(n.getFullYear(), n.getMonth(), 1);
-    return {
-      label: presetRangeLabel[defaultI18n].lastMonth,
-      active: false,
-      dateRange: {
-        start: startMonth,
-        end: endMonth
+    },
+    lastMonth: function () {
+      var n = new Date();
+      var startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2);
+      var endMonth = new Date(n.getFullYear(), n.getMonth(), 1);
+      return {
+        label: presetRangeLabel[i18n].lastMonth,
+        active: false,
+        dateRange: {
+          start: startMonth,
+          end: endMonth
+        }
       }
-    }
-  },
-  last7days: function () {
-    var n = new Date();
-    var start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5);
-    var end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1);
-    return {
-      label: presetRangeLabel[defaultI18n].lastSevenDays,
-      active: false,
-      dateRange: {
-        start: start,
-        end: end
+    },
+    last7days: function () {
+      var n = new Date();
+      var start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5);
+      var end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1);
+      return {
+        label: presetRangeLabel[i18n].lastSevenDays,
+        active: false,
+        dateRange: {
+          start: start,
+          end: end
+        }
       }
-    }
-  },
-  last30days: function () {
-    var n = new Date();
-    var start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29);
-    var end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1);
-    return {
-      label: presetRangeLabel[defaultI18n].lastThirtyDays,
-      active: false,
-      dateRange: {
-        start: start,
-        end: end
+    },
+    last30days: function () {
+      var n = new Date();
+      var start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29);
+      var end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1);
+      return {
+        label: presetRangeLabel[i18n].lastThirtyDays,
+        active: false,
+        dateRange: {
+          start: start,
+          end: end
+        }
       }
     }
   }
@@ -502,7 +506,7 @@ var __vue_module__ = {
     },
     initRange: {
       type: Object,
-      default: null
+      default: function () { return null; }
     },
     startActiveMonth: {
       type: Number,
@@ -514,7 +518,7 @@ var __vue_module__ = {
     },
     presetRanges: {
       type: Object,
-      default: function () { return defaultPresets; }
+      default: function () { return null; }
     },
     compact: {
       type: String,
@@ -568,11 +572,10 @@ var __vue_module__ = {
       return this.activeMonthStart >= 11 ? 0 : this.activeMonthStart + 1
     },
     finalPresetRanges: function () {
-      var this$1 = this;
-
       var tmp = {};
-      for (var i in this$1.presetRanges) {
-        var item = this$1.presetRanges[i];
+      var presets = this.presetRanges || defaultPresets(this.i18n);
+      for (var i in presets) {
+        var item = presets[i];
         var plainItem = item;
         if (typeof item === 'function') {
           plainItem = item();
