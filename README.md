@@ -164,10 +164,11 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
 + **presetRanges**
 
-  *Description* : -
+  *Description* : Set of objects that will shown as quick selection of daterange
 
   *Type* : Object
-  Example : 
+
+  Example Object : 
   ```javascript
   {
     today: function () {
@@ -194,14 +195,10 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
         // label: 'string', active: 'boolean', dateRange: {start: date, end: end}
       }
     },
-    thisMonth: function () {
-    },
-    lastMonth: function () {
-    },
-    last7days: function () {
-    },
-    last30days: function () {
-    }
+    thisMonth: function () {},
+    lastMonth: function () {},
+    last7days: function () {},
+    last30days: function () {}
   }
   ```
 
