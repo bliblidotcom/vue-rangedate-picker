@@ -46,69 +46,71 @@ const defaultStyle = {
   presetRanges: 'calendar_preset-ranges'
 }
 
-const defaultPresets = {
-  today: function () {
-    const n = new Date()
-    const startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0)
-    const endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59)
-    return {
-      label: presetRangeLabel[this.i18n].today,
-      active: false,
-      dateRange: {
-        start: startToday,
-        end: endToday
+const defaultPresets = function (i18n) {
+  return {
+    today: function () {
+      const n = new Date()
+      const startToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0)
+      const endToday = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 23, 59)
+      return {
+        label: presetRangeLabel[i18n].today,
+        active: false,
+        dateRange: {
+          start: startToday,
+          end: endToday
+        }
       }
-    }
-  },
-  thisMonth: function () {
-    const n = new Date()
-    const startMonth = new Date(n.getFullYear(), n.getMonth(), 2)
-    const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1)
-    return {
-      label: presetRangeLabel[this.i18n].thisMonth,
-      active: false,
-      dateRange: {
-        start: startMonth,
-        end: endMonth
+    },
+    thisMonth: function () {
+      const n = new Date()
+      const startMonth = new Date(n.getFullYear(), n.getMonth(), 2)
+      const endMonth = new Date(n.getFullYear(), n.getMonth() + 1, 1)
+      return {
+        label: presetRangeLabel[i18n].thisMonth,
+        active: false,
+        dateRange: {
+          start: startMonth,
+          end: endMonth
+        }
       }
-    }
-  },
-  lastMonth: function () {
-    const n = new Date()
-    const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
-    const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
-    return {
-      label: presetRangeLabel[this.i18n].lastMonth,
-      active: false,
-      dateRange: {
-        start: startMonth,
-        end: endMonth
+    },
+    lastMonth: function () {
+      const n = new Date()
+      const startMonth = new Date(n.getFullYear(), n.getMonth() - 1, 2)
+      const endMonth = new Date(n.getFullYear(), n.getMonth(), 1)
+      return {
+        label: presetRangeLabel[i18n].lastMonth,
+        active: false,
+        dateRange: {
+          start: startMonth,
+          end: endMonth
+        }
       }
-    }
-  },
-  last7days: function () {
-    const n = new Date()
-    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5)
-    const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
-    return {
-      label: presetRangeLabel[this.i18n].lastSevenDays,
-      active: false,
-      dateRange: {
-        start: start,
-        end: end
+    },
+    last7days: function () {
+      const n = new Date()
+      const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 5)
+      const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
+      return {
+        label: presetRangeLabel[i18n].lastSevenDays,
+        active: false,
+        dateRange: {
+          start: start,
+          end: end
+        }
       }
-    }
-  },
-  last30days: function () {
-    const n = new Date()
-    const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29)
-    const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
-    return {
-      label: presetRangeLabel[this.i18n].lastThirtyDays,
-      active: false,
-      dateRange: {
-        start: start,
-        end: end
+    },
+    last30days: function () {
+      const n = new Date()
+      const start = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 29)
+      const end = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1)
+      return {
+        label: presetRangeLabel[i18n].lastThirtyDays,
+        active: false,
+        dateRange: {
+          start: start,
+          end: end
+        }
       }
     }
   }
@@ -159,7 +161,7 @@ export default {
     },
     presetRanges: {
       type: Object,
-      default: () => defaultPresets
+      default: () => defaultPresets(this.i18n)
     },
     compact: {
       type: String,
