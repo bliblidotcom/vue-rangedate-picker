@@ -151,11 +151,11 @@ export default {
       type: Object,
       default: () => null
     },
-    startActiveMonth: {
+    startMonth: {
       type: Number,
       default: new Date().getMonth()
     },
-    startActiveYear: {
+    startYear: {
       type: Number,
       default: new Date().getFullYear()
     },
@@ -180,7 +180,8 @@ export default {
       isOpen: false,
       presetActive: '',
       showMonth: false,
-      activeMonthStart: this.startActiveMonth
+      activeMonthStart: this.startMonth,
+      startActiveYear: this.startYear
     }
   },
   created () {
@@ -212,7 +213,10 @@ export default {
       return new Date(this.startActiveYear, this.activeMonthStart + 2, 0).getDate()
     },
     startNextActiveMonth: function () {
-      return this.activeMonthStart >= 11 ? 0 : this.activeMonthStart + 1
+      return this.activeMonthStart + 1
+    },
+    nextActiveYear: function () {
+      return new Date(this.startActiveYear, this.activeMonthStart + 1, 1).getFullYear()
     },
     finalPresetRanges: function () {
       const tmp = {}

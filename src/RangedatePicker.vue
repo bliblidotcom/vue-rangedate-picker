@@ -23,7 +23,7 @@
         </div>
         <div class="calendar_month_right" v-if="!isCompact">
           <div class="months-text">
-            {{monthsLocale[startNextActiveMonth] +' '+ startActiveYear}}
+            {{monthsLocale[startNextActiveMonth % 12] +' '+ nextActiveYear}}
             <i class="right" @click="goNextMonth"></i>
           </div>
           <ul :class="s.daysWeeks">
@@ -49,7 +49,7 @@
           <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
       </div>
-      
+
     </div>
   </div>
 </template>
