@@ -627,7 +627,7 @@ var __vue_module__ = {
       // bound by > 0 and < last day of month
       return result > 0 && result <= endMonthDate ? result : '&nbsp;'
     },
-    getNewDateRange: function getNewDateRange (result, activeMonth) {
+    getNewDateRange: function getNewDateRange (result, activeMonth, activeYear) {
       var newData = {};
       var key = 'start';
       if (!this.isFirstChoice) {
@@ -635,7 +635,7 @@ var __vue_module__ = {
       } else {
         newData['end'] = null;
       }
-      var resultDate = new Date(this.activeYearStart, activeMonth, result);
+      var resultDate = new Date(activeYear, activeMonth, result);
       if (!this.isFirstChoice && resultDate < this.dateRange.start) {
         this.isFirstChoice = false;
         return { start: resultDate }
@@ -648,7 +648,7 @@ var __vue_module__ = {
     },
     selectFirstItem: function selectFirstItem (r, i) {
       var result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1;
-      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart));
+      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = '';
         if (this.isCompact) {
@@ -658,7 +658,7 @@ var __vue_module__ = {
     },
     selectSecondItem: function selectSecondItem (r, i) {
       var result = this.getDayIndexInMonth(r, i, this.startNextMonthDay) + 1;
-      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth));
+      this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth, this.activeYearEnd));
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = '';
       }
