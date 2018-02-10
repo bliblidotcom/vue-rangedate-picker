@@ -13,7 +13,7 @@
     "dev": "cross-env BABEL_ENV=test webpack-dev-server --inline --hot --open --content-base ./test/unit/ --config config/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint src test config",
-    "test": "npm run lint && npm run flow && npm run test:cover && npm run test:e2e",
+    "test": "npm run lint && npm run test:cover && npm run test:e2e",
     "test:cover": "cross-env BABEL_ENV=test karma start config/karma.cover.conf.js",
     "test:cover-upload": "npm run test:cover && codecov",
     "test:unit": "cross-env BABEL_ENV=test karma start config/karma.unit.conf.js",
