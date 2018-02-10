@@ -1,25 +1,18 @@
 {
   "presets": [
-    [
-      "env",
-    {
-      "targets": {
-        "browsers": [
-          "last 2 versions"
-        ]
-      }
-    }
-    ]
+    ["es2015", {
+      "modules": false
+      }],
+    "flow-vue"
   ],
   "plugins": [
-    "transform-vue-jsx",
-    "transform-object-rest-spread"
+    "babel-plugin-espower",
+    "transform-runtime"
   ],
   "env": {
     "test": {
-      "plugins": [
-        "istanbul"
-      ]
+      "plugins": ["istanbul"],
+      "presets": ["power-assert"]
     }
   }
 }
