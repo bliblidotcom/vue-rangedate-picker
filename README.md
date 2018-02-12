@@ -21,8 +21,6 @@ npm install --save vue-rangedate-picker
 ```js
 import Vue from 'vue'
 import VueRangedatePicker from 'vue-rangedate-picker'
-// You need a specific loader for CSS files like https://github.com/webpack/css-loader
-import 'vue-rangedate-picker/dist/vue-rangedate-picker.css'
 
 Vue.use(VueRangedatePicker)
 ```
@@ -32,11 +30,9 @@ Vue.use(VueRangedatePicker)
 ```html
 <!-- Include after Vue -->
 <!-- Local files -->
-<link rel="stylesheet" href="vue-rangedate-picker/dist/vue-rangedate-picker.css"></link>
-<script src="vue-rangedate-picker/dist/vue-rangedate-picker.js"></script>
+<script src="vue-rangedate-picker/dist/vue-rangedate-picker.min.js"></script>
 
 <!-- From CDN -->
-<link rel="stylesheet" href="https://unpkg.com/vue-rangedate-picker/dist/vue-rangedate-picker.css"></link>
 <script src="https://unpkg.com/vue-rangedate-picker"></script>
 ```
 
