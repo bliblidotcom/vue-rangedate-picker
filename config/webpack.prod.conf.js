@@ -9,7 +9,7 @@ function resolve (dir) {
 
 const commonConfig = {
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.vue', '.js'],
     alias: {
       vue: 'vue/dist/vue.js',
       '@': resolve('src')
@@ -63,7 +63,7 @@ module.exports = [
     output: {
       filename: 'vue-rangedate-picker.min.js',
       libraryTarget: 'window',
-      library: 'VueRangedatePicker',
+      library: 'VueRangedatePicker'
     }
   }),
   merge(commonConfig, {

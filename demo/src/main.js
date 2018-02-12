@@ -1,3 +1,5 @@
+VueRangedatePicker.default.install(Vue)
+
 var app = new Vue({
   el: '#app',
   data () {
@@ -12,8 +14,5 @@ var app = new Vue({
     onDateSelected: function (daterange) {
       this.selectedDate = daterange
     }
-  },
-  components: {
-    VueRangedatePicker
   }
 })

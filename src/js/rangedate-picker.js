@@ -117,6 +117,7 @@ const defaultPresets = function (i18n = defaultI18n) {
 }
 
 export default {
+  name: 'vue-rangedate-picker',
   props: {
     configs: {
       type: Object,

@@ -10,19 +10,19 @@
 // Vue.config.debug = true
 // */
 
-import RangedatePicker from './RangedatePicker.vue'
+import VueRangeDatePicker from './RangedatePicker.vue'
 
 new window.Vue({
   el: 'app',
   template: `<div id="demo">
 <div>
 <strong>Full form</strong>
-<rangedate-picker></rangedate-picker>
+<vue-rangedate-picker></vue-rangedate-picker>
 </div>
 <div style="height: 300px">
 <strong>Compact (mobile)</strong>
-<rangedate-picker compact="true"></rangedate-picker>
+<vue-rangedate-picker compact="true"></vue-rangedate-picker>
 </div>
 </div>`,
-  components: { RangedatePicker }
+  components: { VueRangeDatePicker }
 })
