@@ -43,7 +43,8 @@ const defaultStyle = {
   daysInRange: 'calendar_days_in-range',
   firstDate: 'calendar_month_left',
   secondDate: 'calendar_month_right',
-  presetRanges: 'calendar_preset-ranges'
+  presetRanges: 'calendar_preset-ranges',
+  dateDisabled: 'calendar_days--disabled'
 }
 
 const defaultPresets = function (i18n = defaultI18n) {
@@ -330,6 +331,11 @@ export default {
       }
       return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
         (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime())
+    },
+    isDateDisabled (r, i, startMonthDay, endMonthDate) {
+      const result = this.getDayIndexInMonth(r, i, startMonthDay)
+      // bound by > 0 and < last day of month
+      return !(result > 0 && result <= endMonthDate)
     },
     goPrevMonth () {
       const prevMonth = new Date(this.activeYearStart, this.activeMonthStart, 0)
