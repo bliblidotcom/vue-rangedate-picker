@@ -17,7 +17,8 @@
             </ul>
             <ul v-for="r in 6" :class="[s.days]" :key="r">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
-              [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
+              [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate),
+              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
@@ -31,7 +32,9 @@
           </ul>
           <ul v-for="r in 6" :class="[s.days]" :key="r">
             <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'second', startNextMonthDay, endNextMonthDate),
-            [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
+            [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate),
+            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate)}]"
+                v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
                   @click="selectSecondItem(r, i)"></li>
           </ul>
         </div>
@@ -203,6 +206,9 @@
 .calendar_days li:hover {
   background: #eee;
   color: #000;
+}
+li.calendar_days--disabled{
+   pointer-events: none;
 }
 
 li.calendar_days_selected {
