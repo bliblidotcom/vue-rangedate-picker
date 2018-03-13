@@ -4,7 +4,7 @@
     <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
-        <i class="close" @click="toggleCalendar()"></i>
+        <i class="close" @click="toggleCalendar()">&times</i>
       </div>
       <div class="calendar-wrap">
         <div class="calendar_month_left" :class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
@@ -132,12 +132,12 @@
   cursor: pointer;
 }
 
-.close::after {
-  content: "❌";
-  font-style: normal;
+.close{
   float: right;
-  padding: 10px;
+  padding: 0 10px;
   margin-top: -35px;
+  font-size: 32px;
+  font-weight: normal;
 }
 
 .calendar ul {
