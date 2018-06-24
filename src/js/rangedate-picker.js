@@ -153,6 +153,10 @@ export default {
       type: Object,
       default: () => null
     },
+    initPreset: {
+      type: String,
+      default: () => null
+    },
     startActiveMonth: {
       type: Number,
       default: new Date().getMonth()
@@ -188,10 +192,14 @@ export default {
     }
   },
   created () {
+    if (this.initPreset) {
+      this.updatePreset(this.presets[this.initPreset]())
+    }
     if (this.isCompact) {
       this.isOpen = true
     }
     if (this.activeMonthStart === 11) this.activeYearEnd = this.activeYearStart + 1
+    this.onSelected()
   },
   watch: {
     startNextActiveMonth: function (value) {
@@ -199,6 +207,9 @@ export default {
     }
   },
   computed: {
+    presets: function () {
+      return this.presetRanges || defaultPresets(this.i18n)
+    },
     monthsLocale: function () {
       return this.months || availableMonths[this.i18n]
     },
@@ -225,9 +236,8 @@ export default {
     },
     finalPresetRanges: function () {
       const tmp = {}
-      const presets = this.presetRanges || defaultPresets(this.i18n)
-      for (const i in presets) {
-        const item = presets[i]
+      for (const i in this.presets) {
+        const item = this.presets[i]
         let plainItem = item
         if (typeof item === 'function') {
           plainItem = item()
@@ -358,8 +368,11 @@ export default {
       this.activeYearStart = this.dateRange.start.getFullYear()
       this.activeYearEnd = this.dateRange.end.getFullYear()
     },
-    setDateValue: function () {
+    onSelected: function () {
       this.$emit('selected', this.dateRange)
+    },
+    setDateValue: function () {
+      this.onSelected()
       if (!this.isCompact) {
         this.toggleCalendar()
       }
