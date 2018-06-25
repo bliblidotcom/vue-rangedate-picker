@@ -4,7 +4,7 @@
     <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
-        <i class="close" @click="toggleCalendar()">&times</i>
+        <i :class="{'cancel-button-hidden': !isCancelButtonHidden}" class="close" @click="toggleCalendar()">&times</i>
       </div>
       <div class="calendar-wrap">
         <div class="calendar_month_left" :class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
@@ -49,11 +49,15 @@
             :class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>
-          <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
+        <div class="calendar-range-button-container">
+          <button class="calendar-btn-cancel" @click="toggleCalendar()">{{captions.cancel_button}}</button>
+          <button :class="{'cancel-button-hidden': isCancelButtonHidden}" class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button>
+        </div>
       </div>
-      
+
     </div>
+    <div class='overlay' @click="toggleCalendar()"></div>
   </div>
 </template>
 
@@ -249,12 +253,36 @@ li.calendar_days_in-range {
   margin: -20px 0;
 }
 
-.calendar-btn-apply {
-  width: 100%;
-  background: #f7931e;
+.calendar-range-button-container {
+  position: absolute;
+  bottom: 0;
+  padding: 20px 0px;
+}
+
+.calendar-range-button-container button {
   color: #fff;
   border: none;
   padding: 5px;
   font-size: 14px;
+}
+
+.calendar-btn-apply {
+  background: #f7931e;
+}
+
+.calendar-btn-cancel {
+  background: #cccccc;
+}
+
+.cancel-button-hidden {
+  display: none;
+}
+
+.overlay {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 </style>

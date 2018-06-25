@@ -33,7 +33,8 @@ const presetRangeLabel = {
 
 const defaultCaptions = {
   'title': 'Choose Dates',
-  'ok_button': 'Apply'
+  'ok_button': 'Apply',
+  'cancel_button': 'Cancel'
 }
 
 const defaultStyle = {
@@ -176,6 +177,10 @@ export default {
     righttoleft: {
       type: String,
       default: 'false'
+    },
+    cancelButtonHidden: {
+      type: String,
+      default: 'true'
     }
   },
   data () {
@@ -251,6 +256,9 @@ export default {
     },
     isRighttoLeft: function () {
       return this.righttoleft === 'true'
+    },
+    isCancelButtonHidden: function () {
+      return this.cancelButtonHidden === 'true'
     }
   },
   methods: {
@@ -282,6 +290,7 @@ export default {
     getNewDateRange (result, activeMonth, activeYear) {
       const newData = {}
       let key = 'start'
+      debugger
       if (!this.isFirstChoice) {
         key = 'end'
       } else {
