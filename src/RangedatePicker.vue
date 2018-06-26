@@ -51,13 +51,13 @@
           </li>
         </ul>
         <div class="calendar-range-button-container">
-          <button class="calendar-btn-cancel" @click="toggleCalendar()">{{captions.cancel_button}}</button>
-          <button :class="{'cancel-button-hidden': isCancelButtonHidden}" class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button>
+          <button :class="{'cancel-button-hidden': isCancelButtonHidden}" class="calendar-btn-cancel" @click="toggleCalendar()">{{captions.cancel_button}}</button>
+          <button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button>
         </div>
       </div>
 
     </div>
-    <div class='overlay' @click="toggleCalendar()"></div>
+    <div class='overlay' @click="toggleCalendar()" v-if="isOpen"></div>
   </div>
 </template>
 

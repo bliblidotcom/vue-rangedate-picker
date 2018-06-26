@@ -289,23 +289,20 @@ export default {
     },
     getNewDateRange (result, activeMonth, activeYear) {
       const newData = {}
-      let key = 'start'
-      debugger
-      if (!this.isFirstChoice) {
-        key = 'end'
-      } else {
-        newData['end'] = null
-      }
       const resultDate = new Date(activeYear, activeMonth, result)
-      if (!this.isFirstChoice && resultDate < this.dateRange.start) {
-        this.isFirstChoice = false
-        return { start: resultDate }
+      if (this.isFirstChoice) {
+        newData[this.getKey(!this.isFirstChoice)] = null
+      } else {
+        if (resultDate < this.dateRange.start) {
+          return { start: resultDate, end: this.dateRange.start }
+        }
       }
-
-      // toggle first choice
+      newData[this.getKey(this.isFirstChoice)] = resultDate
       this.isFirstChoice = !this.isFirstChoice
-      newData[key] = resultDate
       return newData
+    },
+    getKey (firstChoice) {
+      return (firstChoice ? 'start' : 'end')
     },
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
