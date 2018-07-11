@@ -221,6 +221,13 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
   *Type* : String
 
   *Default Value* : `'false'`
++ **maxDate**
+
+  *Description* : Pass in a date to prevent selection pass this point
+
+  *Type* : Date
+
+  *Default Value* : `null`
 
 ## Development
 

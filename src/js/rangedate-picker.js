@@ -45,7 +45,8 @@ const defaultStyle = {
   firstDate: 'calendar_month_left',
   secondDate: 'calendar_month_right',
   presetRanges: 'calendar_preset-ranges',
-  dateDisabled: 'calendar_days--disabled'
+  dateDisabled: 'calendar_days--disabled',
+  dateAfterMax: 'calendar_days--after-max'
 }
 
 const defaultPresets = function (i18n = defaultI18n) {
@@ -156,6 +157,10 @@ export default {
     },
     initPreset: {
       type: String,
+      default: () => null
+    },
+    maxDate: {
+      type: Date,
       default: () => null
     },
     startActiveMonth: {
@@ -326,26 +331,14 @@ export default {
     isDateSelected (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
       if (result < 2 || result > endMonthDate + 1) return false
-
-      let currDate = null
-      if (key === 'first') {
-        currDate = new Date(this.activeYearStart, this.activeMonthStart, result)
-      } else {
-        currDate = new Date(this.activeYearEnd, this.startNextActiveMonth, result)
-      }
+      const currDate = this.currentDate(key, result)
       return (this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) ||
         (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime())
     },
     isDateInRange (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
       if (result < 2 || result > endMonthDate + 1) return false
-
-      let currDate = null
-      if (key === 'first') {
-        currDate = new Date(this.activeYearStart, this.activeMonthStart, result)
-      } else {
-        currDate = new Date(this.activeYearEnd, this.startNextActiveMonth, result)
-      }
+      const currDate = this.currentDate(key, result)
       return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
         (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime())
     },
@@ -353,6 +346,22 @@ export default {
       const result = this.getDayIndexInMonth(r, i, startMonthDay)
       // bound by > 0 and < last day of month
       return !(result > 0 && result <= endMonthDate)
+    },
+    isDateAfterMax (r, i, key, startMonthDay, endMonthDate) {
+      if (!this.maxDate) return false
+      const result = this.getDayIndexInMonth(r, i, startMonthDay)
+      const currDate = this.currentDate(key, result)
+      return (currDate > this.maxDate)
+    },
+    currentDate (calendar, day) {
+      // calendar is either 'first' or 'second'
+      let currDate = null
+      if (calendar === 'first') {
+        currDate = new Date(this.activeYearStart, this.activeMonthStart, day)
+      } else {
+        currDate = new Date(this.activeYearEnd, this.startNextActiveMonth, day)
+      }
+      return currDate
     },
     goPrevMonth () {
       const prevMonth = new Date(this.activeYearStart, this.activeMonthStart, 0)

@@ -18,7 +18,7 @@
             <ul v-for="r in 6" :class="[s.days]" :key="r">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
               [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate),
-              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
+              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate), [s.dateAfterMax]: isDateAfterMax(r, i, 'first', startNextMonthDay, endNextMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
@@ -33,7 +33,7 @@
           <ul v-for="r in 6" :class="[s.days]" :key="r">
             <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'second', startNextMonthDay, endNextMonthDate),
             [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate),
-            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate)}]"
+            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate), [s.dateAfterMax]: isDateAfterMax(r, i, 'second', startNextMonthDay, endNextMonthDate)}]"
                 v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
                   @click="selectSecondItem(r, i)"></li>
           </ul>
@@ -211,8 +211,13 @@
   background: #eee;
   color: #000;
 }
-li.calendar_days--disabled{
+li.calendar_days--disabled {
    pointer-events: none;
+}
+
+li.calendar_days--after-max {
+  pointer-events: none;
+  color: #9ca7b2;
 }
 
 li.calendar_days_selected {
