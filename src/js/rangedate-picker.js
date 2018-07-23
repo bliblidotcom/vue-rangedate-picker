@@ -212,7 +212,7 @@ export default {
       return new Date(this.activeYearStart, this.activeMonthStart, 1).getDay()
     },
     startNextMonthDay: function () {
-      return new Date(this.activeYearStart, this.startNextActiveMonth, 1).getDay()
+      return this.startNextActiveMonth === 0 ? new Date(this.activeYearStart, 12, 1).getDay() : new Date(this.activeYearStart, this.startNextActiveMonth, 1).getDay()
     },
     endMonthDate: function () {
       return new Date(this.activeYearEnd, this.startNextActiveMonth, 0).getDate()
