@@ -188,7 +188,7 @@ export default {
     }
   },
   created () {
-    if(this.initRange ){
+    if (this.initRange) {
       this.dateRange = this.initRange
     }
     if (this.isCompact) {
