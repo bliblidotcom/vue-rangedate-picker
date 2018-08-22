@@ -21,14 +21,14 @@ const presetRangeLabel = {
     today: '今日',
     thisMonth: '今月',
     lastMonth: '前月',
-    lastSevenSays: '直近7日間',
+    lastSevenDays: '直近7日間',
     lastThirtyDays: '直近30日間'
   },
   EN: {
     today: 'Today',
     thisMonth: 'This Month',
     lastMonth: 'Last Month',
-    lastSevenSays: 'Last 7 Days',
+    lastSevenDays: 'Last 7 Days',
     lastThirtyDays: 'Last 30 Days'
   },
   ID: {

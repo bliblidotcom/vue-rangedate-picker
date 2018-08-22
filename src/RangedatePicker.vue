@@ -4,7 +4,7 @@
     <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
-        <i :class="{'cancel-button-hidden': !isCancelButtonHidden}" class="close" @click="toggleCalendar()">&times</i>
+        <i class="close" @click="toggleCalendar()">&times</i>
       </div>
       <div class="calendar-wrap">
         <div class="calendar_month_left" :class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
@@ -18,7 +18,7 @@
             <ul v-for="r in 6" :class="[s.days]" :key="r">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
               [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate),
-              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate), [s.dateAfterMax]: isDateAfterMax(r, i, 'first', startNextMonthDay, endNextMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
+              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate), [s.dateAfterMax]: isDateAfterMax(r, i, 'first', startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
@@ -50,14 +50,8 @@
             {{item.label}}
           </li>
         </ul>
-        <div class="calendar-range-button-container">
-          <button :class="{'cancel-button-hidden': isCancelButtonHidden}" class="calendar-btn-cancel" @click="toggleCalendar()">{{captions.cancel_button}}</button>
-          <button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button>
-        </div>
       </div>
-
     </div>
-    <div class='overlay' @click="toggleCalendar()" v-if="isOpen"></div>
   </div>
 </template>
 
