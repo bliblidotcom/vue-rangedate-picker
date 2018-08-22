@@ -3,6 +3,7 @@ import fecha from 'fecha'
 const defaultConfig = {}
 const defaultI18n = 'ID'
 const availableMonths = {
+  JA: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
   EN: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
     'December'],
   ID: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November',
@@ -10,11 +11,19 @@ const availableMonths = {
 }
 
 const availableShortDays = {
+  JA: ['日', '月', '火', '水', '木', '金', '土'],
   EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
 }
 
 const presetRangeLabel = {
+  JA: {
+    today: '今日',
+    thisMonth: '今月',
+    lastMonth: '前月',
+    lastSevenSays: '直近7日間',
+    lastThirtyDays: '直近30日間'
+  },
   EN: {
     today: 'Today',
     thisMonth: 'This Month',
