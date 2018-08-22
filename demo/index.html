@@ -62,7 +62,7 @@
 
             <div class="card-content">
               <div class="daterange-wrapper">
-                <vue-rangedate-picker @selected="onDateSelected" i18n="EN">
+                <vue-rangedate-picker @selected="onDateSelected" i18n="JA" init-preset="last7days" v-bind:max-date="new Date(new Date().setDate(new Date().getDate()-1))">
                 </vue-rangedate-picker>
               </div>
             </div>

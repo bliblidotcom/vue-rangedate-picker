@@ -3,6 +3,7 @@ import fecha from 'fecha'
 const defaultConfig = {}
 const defaultI18n = 'ID'
 const availableMonths = {
+  JA: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
   EN: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
     'December'],
   ID: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November',
@@ -10,16 +11,24 @@ const availableMonths = {
 }
 
 const availableShortDays = {
+  JA: ['日', '月', '火', '水', '木', '金', '土'],
   EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
 }
 
 const presetRangeLabel = {
+  JA: {
+    today: '今日',
+    thisMonth: '今月',
+    lastMonth: '前月',
+    lastSevenDays: '直近7日間',
+    lastThirtyDays: '直近30日間'
+  },
   EN: {
     today: 'Today',
     thisMonth: 'This Month',
     lastMonth: 'Last Month',
-    lastSevenSays: 'Last 7 Days',
+    lastSevenDays: 'Last 7 Days',
     lastThirtyDays: 'Last 30 Days'
   },
   ID: {
@@ -33,7 +42,8 @@ const presetRangeLabel = {
 
 const defaultCaptions = {
   'title': 'Choose Dates',
-  'ok_button': 'Apply'
+  'ok_button': 'Apply',
+  'cancel_button': 'Cancel'
 }
 
 const defaultStyle = {
@@ -44,7 +54,8 @@ const defaultStyle = {
   firstDate: 'calendar_month_left',
   secondDate: 'calendar_month_right',
   presetRanges: 'calendar_preset-ranges',
-  dateDisabled: 'calendar_days--disabled'
+  dateDisabled: 'calendar_days--disabled',
+  dateAfterMax: 'calendar_days--after-max'
 }
 
 const defaultPresets = function (i18n = defaultI18n) {
@@ -153,6 +164,14 @@ export default {
       type: Object,
       default: () => null
     },
+    initPreset: {
+      type: String,
+      default: () => null
+    },
+    maxDate: {
+      type: Date,
+      default: () => null
+    },
     startActiveMonth: {
       type: Number,
       default: new Date().getMonth()
@@ -172,6 +191,10 @@ export default {
     righttoleft: {
       type: String,
       default: 'false'
+    },
+    cancelButtonHidden: {
+      type: String,
+      default: 'true'
     }
   },
   data () {
@@ -188,10 +211,14 @@ export default {
     }
   },
   created () {
+    if (this.initPreset) {
+      this.updatePreset(this.presets[this.initPreset]())
+    }
     if (this.isCompact) {
       this.isOpen = true
     }
     if (this.activeMonthStart === 11) this.activeYearEnd = this.activeYearStart + 1
+    this.onSelected()
   },
   watch: {
     startNextActiveMonth: function (value) {
@@ -199,6 +226,9 @@ export default {
     }
   },
   computed: {
+    presets: function () {
+      return this.presetRanges || defaultPresets(this.i18n)
+    },
     monthsLocale: function () {
       return this.months || availableMonths[this.i18n]
     },
@@ -225,9 +255,8 @@ export default {
     },
     finalPresetRanges: function () {
       const tmp = {}
-      const presets = this.presetRanges || defaultPresets(this.i18n)
-      for (const i in presets) {
-        const item = presets[i]
+      for (const i in this.presets) {
+        const item = this.presets[i]
         let plainItem = item
         if (typeof item === 'function') {
           plainItem = item()
@@ -241,6 +270,9 @@ export default {
     },
     isRighttoLeft: function () {
       return this.righttoleft === 'true'
+    },
+    isCancelButtonHidden: function () {
+      return this.cancelButtonHidden === 'true'
     }
   },
   methods: {
@@ -271,22 +303,20 @@ export default {
     },
     getNewDateRange (result, activeMonth, activeYear) {
       const newData = {}
-      let key = 'start'
-      if (!this.isFirstChoice) {
-        key = 'end'
-      } else {
-        newData['end'] = null
-      }
       const resultDate = new Date(activeYear, activeMonth, result)
-      if (!this.isFirstChoice && resultDate < this.dateRange.start) {
-        this.isFirstChoice = false
-        return { start: resultDate }
+      if (this.isFirstChoice) {
+        newData[this.getKey(!this.isFirstChoice)] = null
+      } else {
+        if (resultDate < this.dateRange.start) {
+          return { start: resultDate, end: this.dateRange.start }
+        }
       }
-
-      // toggle first choice
+      newData[this.getKey(this.isFirstChoice)] = resultDate
       this.isFirstChoice = !this.isFirstChoice
-      newData[key] = resultDate
       return newData
+    },
+    getKey (firstChoice) {
+      return (firstChoice ? 'start' : 'end')
     },
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay) + 1
@@ -310,26 +340,14 @@ export default {
     isDateSelected (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
       if (result < 2 || result > endMonthDate + 1) return false
-
-      let currDate = null
-      if (key === 'first') {
-        currDate = new Date(this.activeYearStart, this.activeMonthStart, result)
-      } else {
-        currDate = new Date(this.activeYearEnd, this.startNextActiveMonth, result)
-      }
+      const currDate = this.currentDate(key, result)
       return (this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) ||
         (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime())
     },
     isDateInRange (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay) + 1
       if (result < 2 || result > endMonthDate + 1) return false
-
-      let currDate = null
-      if (key === 'first') {
-        currDate = new Date(this.activeYearStart, this.activeMonthStart, result)
-      } else {
-        currDate = new Date(this.activeYearEnd, this.startNextActiveMonth, result)
-      }
+      const currDate = this.currentDate(key, result)
       return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
         (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime())
     },
@@ -337,6 +355,22 @@ export default {
       const result = this.getDayIndexInMonth(r, i, startMonthDay)
       // bound by > 0 and < last day of month
       return !(result > 0 && result <= endMonthDate)
+    },
+    isDateAfterMax (r, i, key, startMonthDay, endMonthDate) {
+      if (!this.maxDate) return false
+      const result = this.getDayIndexInMonth(r, i, startMonthDay)
+      const currDate = this.currentDate(key, result)
+      return (currDate > this.maxDate)
+    },
+    currentDate (calendar, day) {
+      // calendar is either 'first' or 'second'
+      let currDate = null
+      if (calendar === 'first') {
+        currDate = new Date(this.activeYearStart, this.activeMonthStart, day)
+      } else {
+        currDate = new Date(this.activeYearEnd, this.startNextActiveMonth, day)
+      }
+      return currDate
     },
     goPrevMonth () {
       const prevMonth = new Date(this.activeYearStart, this.activeMonthStart, 0)
@@ -358,8 +392,11 @@ export default {
       this.activeYearStart = this.dateRange.start.getFullYear()
       this.activeYearEnd = this.dateRange.end.getFullYear()
     },
-    setDateValue: function () {
+    onSelected: function () {
       this.$emit('selected', this.dateRange)
+    },
+    setDateValue: function () {
+      this.onSelected()
       if (!this.isCompact) {
         this.toggleCalendar()
       }

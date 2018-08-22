@@ -76,7 +76,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
   *Type* : Array
 
-  *Default Value* : 
+  *Default Value* :
   ```javascript
   ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli',
    'Agustus', 'September', 'Oktober', 'November', 'Desember']
@@ -88,7 +88,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
   *Type* : Array
 
-  *Default Value* : 
+  *Default Value* :
   ```javascript
   ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
   ```
@@ -99,7 +99,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
   *Type* : Object
 
-  *Default Value* : 
+  *Default Value* :
   ```javascript
   {
     'title': 'Choose Dates',
@@ -121,7 +121,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
   *Type* : Object
 
-  *Default Value* : 
+  *Default Value* :
   ```javascript
   {
     daysWeeks: 'calendar_weeks',
@@ -139,6 +139,14 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
   *Description* : -
 
   *Type* : Object
+
+  *Default Value* : `null`
+
++ **initPreset**
+
+  *Description* : Preset will be selected on launch
+
+  *Type* : String
 
   *Default Value* : `null`
 
@@ -164,7 +172,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
   *Type* : Object
 
-  Example Object : 
+  Example Object :
   ```javascript
   {
     today: function () {
@@ -183,7 +191,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
   }
   ```
 
-  *Default Value* : 
+  *Default Value* :
   ```javascript
   {
     today: function () {
@@ -213,6 +221,13 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
   *Type* : String
 
   *Default Value* : `'false'`
++ **maxDate**
+
+  *Description* : Pass in a date to prevent selection pass this point
+
+  *Type* : Date
+
+  *Default Value* : `null`
 
 ## Development
 
