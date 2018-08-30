@@ -1,10 +1,10 @@
 <template>
-  <div class="calendar-root">
+  <div class="calendar-root" v-on-clickaway="hideCalendar">
     <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
     <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
-        <i class="close" @click="toggleCalendar()">&times</i>
+        <i :class="{'cancel-button-hidden': !isCancelButtonHidden}" class="close" @click="toggleCalendar()">&times</i>
       </div>
       <div class="calendar-wrap">
         <div class="calendar_month_left" :class="{'calendar-left-mobile': isCompact}" v-if="showMonth">
@@ -18,7 +18,7 @@
             <ul v-for="r in 6" :class="[s.days]" :key="r">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
               [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate),
-              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
+              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate), [s.dateAfterMax]: isDateAfterMax(r, i, 'first', startNextMonthDay, endNextMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
@@ -33,7 +33,7 @@
           <ul v-for="r in 6" :class="[s.days]" :key="r">
             <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'second', startNextMonthDay, endNextMonthDate),
             [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate),
-            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate)}]"
+            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate), [s.dateAfterMax]: isDateAfterMax(r, i, 'second', startNextMonthDay, endNextMonthDate)}]"
                 v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
                   @click="selectSecondItem(r, i)"></li>
           </ul>
@@ -49,10 +49,13 @@
             :class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>
-          <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
+        <div class="calendar-range-button-container">
+          <button :class="{'cancel-button-hidden': isCancelButtonHidden}" class="calendar-btn-cancel" @click="toggleCalendar()">{{captions.cancel_button}}</button>
+          <button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button>
+        </div>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -207,8 +210,13 @@
   background: #eee;
   color: #000;
 }
-li.calendar_days--disabled{
+li.calendar_days--disabled {
    pointer-events: none;
+}
+
+li.calendar_days--after-max {
+  pointer-events: none;
+  color: #9ca7b2;
 }
 
 li.calendar_days_selected {
@@ -249,12 +257,28 @@ li.calendar_days_in-range {
   margin: -20px 0;
 }
 
-.calendar-btn-apply {
-  width: 100%;
-  background: #f7931e;
+.calendar-range-button-container {
+  position: absolute;
+  bottom: 0;
+  padding: 20px 0px;
+}
+
+.calendar-range-button-container button {
   color: #fff;
   border: none;
   padding: 5px;
   font-size: 14px;
+}
+
+.calendar-btn-apply {
+  background: #f7931e;
+}
+
+.calendar-btn-cancel {
+  background: #cccccc;
+}
+
+.cancel-button-hidden {
+  display: none;
 }
 </style>
