@@ -1,4 +1,5 @@
 import fecha from 'fecha'
+import { mixin as clickaway } from 'vue-clickaway'
 
 const defaultConfig = {}
 const defaultI18n = 'ID'
@@ -120,6 +121,7 @@ const defaultPresets = function (i18n = defaultI18n) {
 }
 
 export default {
+  mixins: [clickaway],
   name: 'vue-rangedate-picker',
   props: {
     configs: {
@@ -267,6 +269,15 @@ export default {
     }
   },
   methods: {
+    hideCalendar: function () {
+      if (this.isCompact) {
+        this.showMonth = false
+        return
+      }
+      this.showMonth = false
+      this.isOpen = false
+      return
+    },
     toggleCalendar: function () {
       if (this.isCompact) {
         this.showMonth = !this.showMonth

@@ -95,6 +95,7 @@
     "node": ">= 6.0"
   },
   "dependencies": {
-    "fecha": "^2.3.2"
+    "fecha": "^2.3.2",
+    "vue-clickaway": "^2.2.2"
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-root">
+  <div class="calendar-root" v-on-clickaway="hideCalendar">
     <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
     <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
@@ -57,7 +57,6 @@
       </div>
 
     </div>
-    <div class='overlay' @click="toggleCalendar()" v-if="isOpen"></div>
   </div>
 </template>
 
@@ -281,13 +280,5 @@ li.calendar_days_in-range {
 
 .cancel-button-hidden {
   display: none;
-}
-
-.overlay {
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
 }
 </style>
