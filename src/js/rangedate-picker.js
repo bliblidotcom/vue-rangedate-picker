@@ -6,12 +6,15 @@ const availableMonths = {
   EN: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
     'December'],
   ID: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November',
-    'Desember']
+    'Desember'],
+  RU: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'ноябрь',
+    'Декабрь'],
 }
 
 const availableShortDays = {
   EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
+  ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+  RU: ['Вск', 'Пнд', 'Втр', 'Срд', 'Чтв', 'Птн', 'Сбт']
 }
 
 const presetRangeLabel = {
@@ -28,6 +31,13 @@ const presetRangeLabel = {
     lastMonth: 'Bulan lalu',
     lastSevenDays: '7 Hari Terakhir',
     lastThirtyDays: '30 Hari Terakhir'
+  },
+  RU: {
+    today: 'Сегодня',
+    thisMonth: 'Этот месяц',
+    lastMonth: 'Последний месяц',
+    lastSevenSays: 'Последние 7 дней',
+    lastThirtyDays: 'Последние 30 дней'
   }
 }
 
