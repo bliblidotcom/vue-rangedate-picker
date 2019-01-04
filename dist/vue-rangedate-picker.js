@@ -80,8 +80,8 @@
                 return {
                     today: function() {
                         var e = new Date,
-                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate()),
-                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate());
+                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1, 0, 0),
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1, 23, 59);
                         return {
                             label: l[t].today,
                             active: !1,
@@ -120,7 +120,7 @@
                     last7days: function() {
                         var e = new Date,
                             n = new Date(e.getFullYear(), e.getMonth(), e.getDate() - 5),
-                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate());
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
                         return {
                             label: l[t].lastSevenDays,
                             active: !1,
@@ -133,7 +133,7 @@
                     last30days: function() {
                         var e = new Date,
                             n = new Date(e.getFullYear(), e.getMonth(), e.getDate() - 29),
-                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate());
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
                         return {
                             label: l[t].lastThirtyDays,
                             active: !1,
@@ -304,11 +304,11 @@
                     }) : (this.isFirstChoice = !this.isFirstChoice, a[r] = i, a)
                 },
                 selectFirstItem: function(t, e) {
-                    var n = this.getDayIndexInMonth(t, e, this.startMonthDay);
+                    var n = this.getDayIndexInMonth(t, e, this.startMonthDay) + 1;
                     this.dateRange = r()({}, this.dateRange, this.getNewDateRange(n, this.activeMonthStart, this.activeYearStart)), this.dateRange.start && this.dateRange.end && (this.presetActive = "", this.isCompact && (this.showMonth = !1))
                 },
                 selectSecondItem: function(t, e) {
-                    var n = this.getDayIndexInMonth(t, e, this.startNextMonthDay);
+                    var n = this.getDayIndexInMonth(t, e, this.startNextMonthDay) + 1;
                     this.dateRange = r()({}, this.dateRange, this.getNewDateRange(n, this.startNextActiveMonth, this.activeYearEnd)), this.dateRange.start && this.dateRange.end && (this.presetActive = "")
                 },
                 isDateSelected: function(t, e, n, a, r) {
@@ -339,7 +339,10 @@
                     this.presetActive = t.label, this.dateRange = t.dateRange, this.activeMonthStart = this.dateRange.start.getMonth(), this.activeYearStart = this.dateRange.start.getFullYear(), this.activeYearEnd = this.dateRange.end.getFullYear()
                 },
                 setDateValue: function() {
-                    this.$emit("selected", this.dateRange), this.isCompact || this.toggleCalendar()
+                    const val1 = this.getDateString(this.dateRange.start);
+                    const val2 = this.getDateString(this.dateRange.end);
+                    const dateRange = {start: new Date(val1), end: new Date(val2)};
+                    this.$emit("selected", dateRange), this.isCompact || this.toggleCalendar()
                 }
             }
         }
