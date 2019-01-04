@@ -304,11 +304,11 @@
                     }) : (this.isFirstChoice = !this.isFirstChoice, a[r] = i, a)
                 },
                 selectFirstItem: function(t, e) {
-                    var n = this.getDayIndexInMonth(t, e, this.startMonthDay) + 1;
+                    var n = this.getDayIndexInMonth(t, e, this.startMonthDay);
                     this.dateRange = r()({}, this.dateRange, this.getNewDateRange(n, this.activeMonthStart, this.activeYearStart)), this.dateRange.start && this.dateRange.end && (this.presetActive = "", this.isCompact && (this.showMonth = !1))
                 },
                 selectSecondItem: function(t, e) {
-                    var n = this.getDayIndexInMonth(t, e, this.startNextMonthDay) + 1;
+                    var n = this.getDayIndexInMonth(t, e, this.startNextMonthDay);
                     this.dateRange = r()({}, this.dateRange, this.getNewDateRange(n, this.startNextActiveMonth, this.activeYearEnd)), this.dateRange.start && this.dateRange.end && (this.presetActive = "")
                 },
                 isDateSelected: function(t, e, n, a, r) {
