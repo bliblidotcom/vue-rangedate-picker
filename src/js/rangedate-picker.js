@@ -180,6 +180,7 @@ export default {
       numOfDays: 7,
       isFirstChoice: true,
       isOpen: false,
+      showMobile: false,
       presetActive: '',
       showMonth: false,
       activeMonthStart: this.startActiveMonth,
@@ -247,6 +248,7 @@ export default {
     toggleCalendar: function () {
       if (this.isCompact) {
         this.showMonth = !this.showMonth
+        this.showMobile = true;
         return
       }
       this.isOpen = !this.isOpen

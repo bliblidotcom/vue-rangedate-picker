@@ -1,7 +1,7 @@
 <template>
   <div class="calendar-root">
     <div class="input-date" @click="toggleCalendar()"> {{getDateString(dateRange.start)}} - {{getDateString(dateRange.end)}}</div>
-    <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft}" v-if="isOpen">
+    <div class="calendar" :class="{'calendar-mobile ': isCompact, 'calendar-right-to-left': isRighttoLeft, 'show-Mobile': showMobile}" v-if="isOpen">
       <div class="calendar-head" v-if="!isCompact">
         <h2>{{captions.title}}</h2>
         <i class="close" @click="toggleCalendar()">&times</i>
@@ -240,6 +240,11 @@ li.calendar_days_in-range {
   width: 260px;
   z-index: 1;
   box-shadow: none;
+  display: none;
+}
+
+.show-Mobile{
+    display: block;
 }
 
 .calendar-range-mobile {
