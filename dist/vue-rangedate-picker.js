@@ -48,10 +48,12 @@
             l = {
                 EN: {
                     today: "Today",
-                    thisMonth: "This Month",
-                    lastMonth: "Last Month",
-                    lastSevenSays: "Last 7 Days",
-                    lastThirtyDays: "Last 30 Days"
+                    lastFifteenDays: "Last 15 days",
+                    yesterday: "Yesterday",
+                    thisMonth: "This month",
+                    thisYear: "This year",
+                    lastWeek: "Last 7 days",
+                    lastMonth: "Last month",
                 },
                 ID: {
                     today: "Hari ini",
@@ -91,12 +93,64 @@
                             }
                         }
                     },
+                    lastFifteenDays: function(){
+                        var e = new Date,
+                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate() - 13, 0, 0),
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
+                        return {
+                            label: l[t].lastFifteenDays,
+                            active: !1,
+                            dateRange: {
+                                start: n,
+                                end: a
+                            }
+                        }
+                    },
+                    yesterday: function(){
+                        var e = new Date,
+                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate()),
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate());
+                        return {
+                            label: l[t].yesterday,
+                            active: !1,
+                            dateRange: {
+                                start: n,
+                                end: a
+                            }
+                        }
+                    },
                     thisMonth: function() {
                         var e = new Date,
                             n = new Date(e.getFullYear(), e.getMonth(), 2),
                             a = new Date(e.getFullYear(), e.getMonth() + 1, 1);
                         return {
                             label: l[t].thisMonth,
+                            active: !1,
+                            dateRange: {
+                                start: n,
+                                end: a
+                            }
+                        }
+                    },
+                    thisYear: function() {
+                        var e = new Date,
+                            n = new Date(e.getFullYear(), 0, 2),
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
+                        return {
+                            label: l[t].thisYear,
+                            active: !1,
+                            dateRange: {
+                                start: n,
+                                end: a
+                            }
+                        }
+                    },
+                    lastWeek: function() {
+                        var e = new Date,
+                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate() - 5),
+                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
+                        return {
+                            label: l[t].lastWeek,
                             active: !1,
                             dateRange: {
                                 start: n,
@@ -117,32 +171,6 @@
                             }
                         }
                     },
-                    last7days: function() {
-                        var e = new Date,
-                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate() - 5),
-                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
-                        return {
-                            label: l[t].lastSevenDays,
-                            active: !1,
-                            dateRange: {
-                                start: n,
-                                end: a
-                            }
-                        }
-                    },
-                    last30days: function() {
-                        var e = new Date,
-                            n = new Date(e.getFullYear(), e.getMonth(), e.getDate() - 29),
-                            a = new Date(e.getFullYear(), e.getMonth(), e.getDate() + 1);
-                        return {
-                            label: l[t].lastThirtyDays,
-                            active: !1,
-                            dateRange: {
-                                start: n,
-                                end: a
-                            }
-                        }
-                    }
                 }
             };
         e.a = {
