@@ -52,7 +52,6 @@
           <li><button class="calendar-btn-apply" @click="setDateValue()">{{captions.ok_button}}</button></li>
         </ul>
       </div>
-      
     </div>
   </div>
 </template>
