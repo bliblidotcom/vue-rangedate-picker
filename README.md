@@ -64,7 +64,7 @@ You can pass these below props to `<rangedate-picker :props="props"></rangedate-
 
 + **i18n**
 
-  *Description* : For text translation (currently: ID/EN)
+  *Description* : For text translation (currently: ID/EN/FR)
 
   *Type* : String
 
