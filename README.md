@@ -33,7 +33,7 @@ Vue.use(VueRangedatePicker)
 <script src="vue-rangedate-picker/dist/vue-rangedate-picker.min.js"></script>
 
 <!-- From CDN -->
-<script src="https://unpkg.com/vue-rangedate-picker"></script>
+<script src="https://unpkg.com/vue-rangedate-picker/dist/vue-rangedate-picker.min.js"></script>
 ```
 
 ### Available Events
