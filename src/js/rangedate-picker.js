@@ -321,7 +321,7 @@ export default {
     },
     isDateInRange (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay)
-      if (result < 2 || result > endMonthDate) return false
+      if (result < 1 || result > endMonthDate) return false
 
       let currDate = null
       if (key === 'first') {
