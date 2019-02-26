@@ -15,7 +15,7 @@ describe('RangedatePicker', () => {
 
   describe('image', () => {
     it('should be /abc.jpg', () => {
-      assert(vm.image === '/abc.jpg', 'You should be implemented!!')
+      assert(vm && vm.image === '/abc.jpg', 'You should be implemented!!')
     })
   })
 })
