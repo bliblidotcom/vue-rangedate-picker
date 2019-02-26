@@ -6,12 +6,15 @@ const availableMonths = {
   EN: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
     'December'],
   ID: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November',
-    'Desember']
+    'Desember'],
+  BR: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
+    'Dezembro']
 }
 
 const availableShortDays = {
   EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
+  ID: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+  BR: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
 }
 
 const presetRangeLabel = {
@@ -28,6 +31,13 @@ const presetRangeLabel = {
     lastMonth: 'Bulan lalu',
     lastSevenDays: '7 Hari Terakhir',
     lastThirtyDays: '30 Hari Terakhir'
+  },
+  BR: {
+    today: 'Hoje',
+    thisMonth: 'Este Mês',
+    lastMonth: 'Último Mês',
+    lastSevenDays: 'Últimos 7 dias',
+    lastThirtyDays: 'Último 30 dias'
   }
 }
 
