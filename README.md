@@ -38,7 +38,7 @@ Vue.use(VueRangedatePicker)
 
 ### Available Events
 
-You can catch these below Events to `<rangedate-picker @events="events"></rangedate-picker>` template :
+You can catch these below Events to `<vue-rangedate-picker @events="events"></vue-rangedate-picker>` template :
 
 + **selected**
 
@@ -52,7 +52,7 @@ You can catch these below Events to `<rangedate-picker @events="events"></ranged
 
 ### Available Props
 
-You can pass these below props to `<rangedate-picker :props="props"></rangedate-picker>` template :
+You can pass these below props to `<vue-rangedate-picker :props="props"></vue-rangedate-picker>` template :
 
 + **configs**
 
