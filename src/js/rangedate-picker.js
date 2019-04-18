@@ -150,7 +150,7 @@ export default {
     },
     initRange: {
       type: Object,
-      default: () => null
+      default: () => {}
     },
     startActiveMonth: {
       type: Number,
@@ -175,7 +175,7 @@ export default {
   },
   data () {
     return {
-      dateRange: {},
+      dateRange: this.initRange,
       numOfDays: 7,
       isFirstChoice: true,
       isOpen: false,
