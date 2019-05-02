@@ -175,7 +175,7 @@ export default {
   },
   data () {
     return {
-      dateRange: {},
+      dateRange: this.initRange ? this.initRange : {},
       numOfDays: 7,
       isFirstChoice: true,
       isOpen: false,
