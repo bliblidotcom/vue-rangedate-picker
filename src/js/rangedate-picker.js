@@ -146,7 +146,8 @@ export default {
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => {
+      }
     },
     initRange: {
       type: Object,
@@ -290,7 +291,7 @@ export default {
     selectFirstItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startMonthDay)
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart,
-      this.activeYearStart))
+        this.activeYearStart))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
         if (this.isCompact) {
@@ -301,7 +302,7 @@ export default {
     selectSecondItem (r, i) {
       const result = this.getDayIndexInMonth(r, i, this.startNextMonthDay)
       this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.startNextActiveMonth,
-      this.activeYearEnd))
+        this.activeYearEnd))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
       }
@@ -356,6 +357,7 @@ export default {
       this.activeMonthStart = this.dateRange.start.getMonth()
       this.activeYearStart = this.dateRange.start.getFullYear()
       this.activeYearEnd = this.dateRange.end.getFullYear()
+      this.$emit('setPreset', item.label)
     },
     setDateValue: function () {
       this.$emit('selected', this.dateRange)
