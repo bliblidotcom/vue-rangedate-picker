@@ -45,7 +45,7 @@
             class="calendar_preset-ranges"
             v-for="(item, idx) in finalPresetRanges"
             :key="idx"
-            @click="updatePreset(item)"
+            @click="updatePreset(item, idx)"
             :class="{'active-preset': presetActive === item.label}">
             {{item.label}}
           </li>

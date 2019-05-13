@@ -350,14 +350,14 @@ export default {
       this.activeYearStart = nextMonth.getFullYear()
       this.activeYearEnd = nextMonth.getFullYear()
     },
-    updatePreset (item) {
+    updatePreset (item, idx) {
       this.presetActive = item.label
       this.dateRange = item.dateRange
       // update start active month
       this.activeMonthStart = this.dateRange.start.getMonth()
       this.activeYearStart = this.dateRange.start.getFullYear()
       this.activeYearEnd = this.dateRange.end.getFullYear()
-      this.$emit('setPreset', item.label)
+      this.$emit('setPreset', idx)
     },
     setDateValue: function () {
       this.$emit('selected', this.dateRange)
