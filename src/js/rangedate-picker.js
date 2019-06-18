@@ -294,6 +294,7 @@ export default {
         this.activeYearStart))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
+        this.$emit('setPreset', null)
         if (this.isCompact) {
           this.showMonth = false
         }
@@ -305,6 +306,7 @@ export default {
         this.activeYearEnd))
       if (this.dateRange.start && this.dateRange.end) {
         this.presetActive = ''
+        this.$emit('setPreset', null)
       }
     },
     isDateSelected (r, i, key, startMonthDay, endMonthDate) {
