@@ -335,7 +335,7 @@ export default {
     },
     isDateInRange (r, i, key, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay)
-      if (result < 2 || result > endMonthDate) return false
+      if (result < 1 || result > endMonthDate) return false
 
       let currDate = null
       if (key === 'first') {
@@ -343,6 +343,7 @@ export default {
       } else {
         currDate = new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, result))
       }
+
       return (this.dateRange.start && this.dateRange.start.getTime() <= currDate.getTime()) &&
         (this.dateRange.end && this.dateRange.end.getTime() >= currDate.getTime())
     },
