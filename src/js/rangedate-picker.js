@@ -175,8 +175,19 @@ export default {
     }
   },
   data () {
+    const initRange = this.initRange ? this.initRange : {}
+    if (initRange.star) {
+      initRange.start.setHours(0)
+      initRange.start.setMinutes(0)
+      initRange.start.setSeconds(0)
+    }
+    if (initRange.end) {
+      initRange.end.setHours(23)
+      initRange.end.setMinutes(59)
+      initRange.end.setSeconds(59)
+    }
     return {
-      dateRange: this.initRange ? this.initRange : {},
+      dateRange: initRange,
       numOfDays: 7,
       isFirstChoice: true,
       isOpen: false,
@@ -332,8 +343,8 @@ export default {
       } else {
         currDate = new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, result))
       }
-      return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
-        (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime())
+      return (this.dateRange.start && this.dateRange.start.getTime() <= currDate.getTime()) &&
+        (this.dateRange.end && this.dateRange.end.getTime() >= currDate.getTime())
     },
     isDateDisabled (r, i, startMonthDay, endMonthDate) {
       const result = this.getDayIndexInMonth(r, i, startMonthDay)
