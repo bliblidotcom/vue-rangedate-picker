@@ -174,7 +174,7 @@ export default {
     },
     disableTo: {
       default: () => new Date()
-    },
+    }
   },
   data () {
     return {
