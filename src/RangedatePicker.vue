@@ -18,7 +18,8 @@
             <ul v-for="r in 6" :class="[s.days]" :key="r">
               <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'first', startMonthDay, endMonthDate),
               [s.daysInRange]: isDateInRange(r, i, 'first', startMonthDay, endMonthDate),
-              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate)}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
+              [s.dateDisabled]: isDateDisabled(r, i, startMonthDay, endMonthDate),
+              [s.dateDisabled]: isDateAvailabe(r, i, startMonthDay, endMonthDate, 'left')}]" v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startMonthDay, endMonthDate)"
                 @click="selectFirstItem(r, i)"></li>
             </ul>
         </div>
@@ -33,7 +34,8 @@
           <ul v-for="r in 6" :class="[s.days]" :key="r">
             <li :class="[{[s.daysSelected]: isDateSelected(r, i, 'second', startNextMonthDay, endNextMonthDate),
             [s.daysInRange]: isDateInRange(r, i, 'second', startNextMonthDay, endNextMonthDate),
-            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate)}]"
+            [s.dateDisabled]: isDateDisabled(r, i, startNextMonthDay, endNextMonthDate),
+            [s.dateDisabled]: isDateAvailabe(r, i, startNextMonthDay, endNextMonthDate, 'right')}]"
                 v-for="i in numOfDays" :key="i" v-html="getDayCell(r, i, startNextMonthDay, endNextMonthDate)"
                   @click="selectSecondItem(r, i)"></li>
           </ul>

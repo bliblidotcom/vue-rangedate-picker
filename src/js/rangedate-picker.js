@@ -171,6 +171,9 @@ export default {
     righttoleft: {
       type: String,
       default: 'false'
+    },
+    disableTo: {
+      default: () => new Date()
     }
   },
   data () {
@@ -356,6 +359,29 @@ export default {
       this.activeMonthStart = this.dateRange.start.getMonth()
       this.activeYearStart = this.dateRange.start.getFullYear()
       this.activeYearEnd = this.dateRange.end.getFullYear()
+    },
+    isDateAvailabe (r, i, startMonthDay, endMonthDate, type) {
+      if (this.disableTo) {
+        const result = this.getDayIndexInMonth(r, i, startMonthDay)
+        let flag = false
+        let month = ''
+        if (type === 'right') {
+          month = this.startNextActiveMonth
+        }
+        if (type === 'left') {
+          month = this.activeMonthStart
+        }
+        const selectedDate = new Date(this.activeYearEnd, month, result, 0, 0, 0, 0)
+        const currentDate = new Date(this.disableTo)
+        currentDate.setHours(0, 0, 0, 0)
+        if (currentDate.getTime() > selectedDate.getTime()) {
+          flag = true
+        }
+        const finalFlag = result > 0 && result <= endMonthDate ? flag : true
+        return (finalFlag)
+      }
+      const result = this.getDayIndexInMonth(r, i, startMonthDay)
+      return !(result > 0 && result <= endMonthDate)
     },
     setDateValue: function () {
       this.$emit('selected', this.dateRange)
