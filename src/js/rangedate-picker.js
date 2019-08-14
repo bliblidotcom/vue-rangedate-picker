@@ -220,16 +220,16 @@ export default {
       return Object.assign({}, defaultStyle, this.style)
     },
     startMonthDay: function () {
-      return new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 1)).getDay()
+      return new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 1)).getUTCDay()
     },
     startNextMonthDay: function () {
-      return new Date(Date.UTC(this.activeYearStart, this.startNextActiveMonth, 1)).getDay()
+      return new Date(Date.UTC(this.activeYearStart, this.startNextActiveMonth, 1)).getUTCDay()
     },
     endMonthDate: function () {
-      return new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, 0)).getDate()
+      return new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, 0)).getUTCDate()
     },
     endNextMonthDate: function () {
-      return new Date(Date.UTC(this.activeYearEnd, this.activeMonthStart + 2, 0)).getDate()
+      return new Date(Date.UTC(this.activeYearEnd, this.activeMonthStart + 2, 0)).getUTCDate()
     },
     startNextActiveMonth: function () {
       return this.activeMonthStart >= 11 ? 0 : this.activeMonthStart + 1
