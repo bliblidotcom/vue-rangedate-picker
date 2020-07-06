@@ -191,8 +191,19 @@ export default {
     }
   },
   data () {
+    const initRange = this.initRange ? this.initRange : {}
+    if (initRange.start) {
+      initRange.start.setHours(0)
+      initRange.start.setMinutes(0)
+      initRange.start.setSeconds(0)
+    }
+    if (initRange.end) {
+      initRange.end.setHours(23)
+      initRange.end.setMinutes(59)
+      initRange.end.setSeconds(59)
+    }
     return {
-      dateRange: {},
+      dateRange: initRange,
       numOfDays: 7,
       isFirstChoice: true,
       isOpen: false,
