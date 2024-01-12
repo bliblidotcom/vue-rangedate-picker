@@ -30,7 +30,6 @@
     "babel-preset-flow-vue": "^1.0.0",
     "babel-preset-power-assert": "^1.0.0",
     "buble": "^0.14.0",
-    "chromedriver": "^2.27.2",
     "codecov": "^3.0.0",
     "conventional-changelog-cli": "^1.2.0",
     "conventional-github-releaser": "^1.1.3",
